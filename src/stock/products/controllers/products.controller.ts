@@ -3,9 +3,11 @@ import { CreateService } from '../services/create.service';
 import { UpdateService } from '../services/update.service';
 import { CreateProductDto } from '../dto/create-produt.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('products')
+@Controller('stock/products')
 @UseGuards(AuthGuard('jwt'))
+@ApiTags('Stock-Products')
 export class ProductsController {
     constructor(
         private readonly createProductsService: CreateService,

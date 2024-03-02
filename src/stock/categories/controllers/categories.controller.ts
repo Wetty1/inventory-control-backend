@@ -12,9 +12,11 @@ import { CreateService } from '../services/create.service';
 import { GetByIdService } from '../services/get-by-id.service';
 import { CreateCategoryDto, ListCategoryDto } from '../dto/category.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('categories')
+@Controller('stock/categories')
 @UseGuards(AuthGuard('jwt'))
+@ApiTags('Stock-Categories')
 export class CategoriesController {
     constructor(
         private readonly listService: ListService,

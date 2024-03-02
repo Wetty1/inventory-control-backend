@@ -5,9 +5,11 @@ import { CreateEventDto } from '../dto/create-event.dto';
 import { ExtractByProductService } from '../services/extract-by-product.service';
 import { GetBalanceByProductService } from '../services/get-balance-by-product.service';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('events')
+@Controller('stock/events')
 @UseGuards(AuthGuard('jwt'))
+@ApiTags('Stock-Events')
 export class EventsController {
     constructor(
         private readonly listService: ListService,

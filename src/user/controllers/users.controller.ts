@@ -4,9 +4,11 @@ import { CreateUserService } from '../services/create-user.service';
 import { GetByIdService } from '../services/get-by-id.service';
 import { UserCreateDto } from '../dtos/user.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('users')
 @UseGuards(AuthGuard('jwt'))
+@ApiTags('Users')
 export class UsersController {
     constructor(
         private createUserService: CreateUserService,
