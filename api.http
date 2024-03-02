@@ -1,8 +1,20 @@
 ###
+
 POST http://localhost:3000/users
+content-type: application/json
 
 {
-    "name": "wesley",
+    "name": "leticia",
     "password": "teste",
-    "email": "teste@teste.com"
+    "email": "teste1@teste.com"
+}
+
+###
+
+POST  http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "teste1@teste.com",
+    "password": "teste"
 }

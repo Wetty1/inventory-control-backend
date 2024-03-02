@@ -13,6 +13,7 @@ export class UsersController {
         private getByIdService: GetByIdService,
         private changePasswordService: ChangePasswordService,
     ) {}
+
     @Post()
     async create(@Body() body: UserCreateDto) {
         return this.createUserService.execute(body);
@@ -23,7 +24,7 @@ export class UsersController {
         return this.getByIdService.execute(id);
     }
 
-    @Post()
+    @Post('/reset-password')
     async changePassword(@Body() body) {
         return this.changePasswordService.execute(body.id, body.newPassword);
     }
