@@ -6,6 +6,8 @@ import { ConfigModule } from '@nestjs/config';
 import { SharedModule } from './shared/shared.module';
 import { ConnectionFactory } from './shared/infra/typeorm/connection.factory';
 import { UserModule } from './user/user.module';
+import { PurchaseModule } from './purchase/purchase.module';
+import { RevenueModule } from './revenue/revenue.module';
 
 @Module({
     imports: [
@@ -19,7 +21,8 @@ import { UserModule } from './user/user.module';
         StockModule,
         AuthModule,
         UserModule,
+        PurchaseModule,
+        RevenueModule,
     ],
-    providers: [],
 })
 export class AppModule {}
