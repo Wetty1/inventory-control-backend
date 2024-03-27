@@ -1,4 +1,4 @@
-import { Purchase } from 'src/purchase/domain/entities/purchase';
+import { Revenue } from 'src/revenue/domain/entities/revenue';
 import {
     Column,
     CreateDateColumn,
@@ -7,20 +7,14 @@ import {
     UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('purchases')
-export class PurchaseTypeorm implements Purchase {
+@Entity('revenue')
+export class RevenueTypeorm implements Revenue {
     @PrimaryGeneratedColumn()
     id?: number;
     @Column()
+    value: number;
+    @Column()
     date: Date;
-    @Column()
-    productId: number;
-    @Column()
-    total_value: number;
-    @Column()
-    unit_value: number;
-    @Column()
-    quantity: number;
     @CreateDateColumn()
     createdAt?: Date;
     @UpdateDateColumn()

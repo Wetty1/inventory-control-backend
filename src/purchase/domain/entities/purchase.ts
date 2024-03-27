@@ -1,11 +1,10 @@
 export interface Purchase {
     id?: number;
     date: Date;
-    value: number;
-    event_id: number;
+    productId: number;
     quantity: number;
     unit_value: number;
     total_value: number;
-    created_at?: Date;
-    updated_at?: Date;
+    createdAt?: Date;
+    updatedAt?: Date;
 }

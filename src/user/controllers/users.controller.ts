@@ -7,7 +7,6 @@ import { AuthGuard } from '@nestjs/passport';
 import { ApiTags } from '@nestjs/swagger';
 
 @Controller('users')
-@UseGuards(AuthGuard('jwt'))
 @ApiTags('Users')
 export class UsersController {
     constructor(
@@ -21,11 +20,13 @@ export class UsersController {
         return this.createUserService.execute(body);
     }
 
+    @UseGuards(AuthGuard('jwt'))
     @Get('/:id')
     async getById(@Param('id') id) {
         return this.getByIdService.execute(id);
     }
 
+    @UseGuards(AuthGuard('jwt'))
     @Post('/reset-password')
     async changePassword(@Body() body) {
         return this.changePasswordService.execute(body.id, body.newPassword);

@@ -29,7 +29,6 @@ describe('CreatePurchaseService', () => {
     it('should create a new purchase', async () => {
         const purchase = {
             date: new Date(),
-            value: 100,
             event_id: 1,
             quantity: 1,
             total_value: 100,

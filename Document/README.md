@@ -4,8 +4,8 @@
 - [x] Cadastrar um produto
 - [x] Cadastrar uma categoria
 - [x] Cadastrar um evento
+- [ ] Refazer as migrations (Ajustar padrão do Typeorm)
 - [ ] Refatorar o todo o modulo de estoque
-- [ ] Refazer as migrations
 
 # Estoque
 
@@ -34,8 +34,8 @@ Módulo de estoque
 
 - [x] Modulo de compras
 - [x] TDD de criação
-- [ ] Conexão typeorm
-- [ ] Criação de uma compra
+- [x] Conexão typeorm
+- [ ] Criação de uma compra e criação de um evento de estoque
 
 # Receita
 

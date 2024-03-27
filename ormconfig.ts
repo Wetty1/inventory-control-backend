@@ -6,7 +6,7 @@ export const connectionSource = new DataSource({
     port: parseInt(process.env.DB_PORT) || 5432,
     username: process.env.DB_USER || 'admin',
     password: process.env.DB_PASS || '123456',
-    database: process.env.DB_NAME || 'postgres',
+    database: process.env.DB_NAME || 'pmef',
     synchronize: false,
     logging: false,
     entities: [__dirname + '/src/modules/**/infra/typeorm/entities/*{.js,.ts}'],

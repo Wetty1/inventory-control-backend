@@ -14,7 +14,7 @@ export class CategoryStoreTypeorm implements CategoryStoreGateway {
     ) {}
 
     async create(category: Category): Promise<Category> {
-        const categoryCreated = await this.repository.create({
+        const categoryCreated = this.repository.create({
             name: category.name,
         });
         return await this.repository.save(categoryCreated);

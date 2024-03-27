@@ -9,7 +9,7 @@ import {
 import { Event } from '../../entities/event';
 import { ProductORM } from 'src/stock/products/gateways/interfaces/product.entity';
 
-@Entity('Event')
+@Entity('events')
 export class EventTORM implements Event {
     @PrimaryGeneratedColumn()
     id: number;
@@ -23,7 +23,6 @@ export class EventTORM implements Event {
     quantity: number;
     @Column()
     type: 'entrada' | 'saida';
-
     @CreateDateColumn()
     createdAt: Date;
     @UpdateDateColumn()

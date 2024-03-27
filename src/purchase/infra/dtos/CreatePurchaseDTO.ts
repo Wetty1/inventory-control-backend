@@ -1,6 +1,7 @@
 export interface CreatePurchaseDTO {
     date: Date;
-    value: number;
-    event_id: number;
+    productId: number;
+    quantity: number;
+    total_value: number;
     unit_value: number;
 }

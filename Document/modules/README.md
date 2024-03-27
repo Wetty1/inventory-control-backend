@@ -36,4 +36,4 @@
 
 - id
 - name
-- category_id
+- categoryId
