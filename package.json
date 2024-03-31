@@ -92,6 +92,10 @@
             "implementations",
             "entities"
         ],
+        "collectCoverageFrom": [
+            "**/domain/**/*.ts",
+            "!**/node_modules/**"
+        ],
         "testEnvironment": "node"
     }
 }

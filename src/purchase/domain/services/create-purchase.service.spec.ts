@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CreatePurchaseService } from './create-purchase.service';
 import { PurchaseMemoryRepository } from '../../infra/memory/purchase-memory.repository';
 import { PurchaseRepository } from '../repositories/purchase.repository';
+import { Purchase } from '../entities/purchase';
 
 describe('CreatePurchaseService', () => {
     let service: CreatePurchaseService;
@@ -27,9 +28,9 @@ describe('CreatePurchaseService', () => {
     });
 
     it('should create a new purchase', async () => {
-        const purchase = {
+        const purchase: Purchase = {
             date: new Date(),
-            event_id: 1,
+            productId: 1,
             quantity: 1,
             total_value: 100,
             unit_value: 100,

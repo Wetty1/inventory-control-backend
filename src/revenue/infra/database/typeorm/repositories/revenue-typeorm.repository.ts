@@ -3,7 +3,9 @@ import { RevenueRepository } from 'src/revenue/domain/repositories/revenue.repos
 import { Repository } from 'typeorm';
 import { RevenueTypeorm } from '../entities/revenue.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class RevenueTypeormRepository implements RevenueRepository {
     constructor(
         @InjectRepository(RevenueTypeorm)
