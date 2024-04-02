@@ -1,25 +1,25 @@
 import { Module } from '@nestjs/common';
-import { ProductsController } from './controllers/products.controller';
-import { CreateService } from './services/create.service';
-import { UpdateService } from './services/update.service';
-import { DeleteService } from './services/delete.service';
-import { ReadService } from './services/read.service';
-import { ProductStoreTypeorm } from './gateways/implementations/product-store-prisma';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ProductORM } from './gateways/interfaces/product.entity';
+import { ProductTypeorm } from './infra/typeorm/entities/product.entity';
+import { CreateService } from './domain/services/create.service';
+import { DeleteService } from './domain/services/delete.service';
+import { ReadService } from './domain/services/read.service';
+import { UpdateService } from './domain/services/update.service';
+import { ProductsController } from './infra/controllers/products.controller';
+import { ProductStoreTypeorm } from './infra/typeorm/repositories/product-store-prisma';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ProductORM])],
-  controllers: [ProductsController],
-  providers: [
-    CreateService,
-    UpdateService,
-    DeleteService,
-    ReadService,
-    {
-      provide: 'ProductStoreGateway',
-      useClass: ProductStoreTypeorm,
-    },
-  ],
+    imports: [TypeOrmModule.forFeature([ProductTypeorm])],
+    controllers: [ProductsController],
+    providers: [
+        CreateService,
+        UpdateService,
+        DeleteService,
+        ReadService,
+        {
+            provide: 'ProductRepository',
+            useClass: ProductStoreTypeorm,
+        },
+    ],
 })
 export class ProductsModule {}

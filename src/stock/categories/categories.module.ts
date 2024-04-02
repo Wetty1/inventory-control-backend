@@ -1,22 +1,22 @@
 import { Module } from '@nestjs/common';
-import { CategoriesController } from './controllers/categories.controller';
-import { CreateService } from './services/create.service';
-import { GetByIdService } from './services/get-by-id.service';
-import { ListService } from './services/list.service';
-import { CategoryStoreTypeorm } from './gateways/implementations/category-story-typeorm';
+import { CategoriesController } from './infra/categories.controller';
+import { CreateService } from './domain/services/create.service';
+import { GetByIdService } from './domain/services/get-by-id.service';
+import { ListService } from './domain/services/list.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CategoryORM } from './gateways/interfaces/category.entity';
+import { CategoryTypeorm } from './infra/typeorm/entities/category.entity';
+import { CategoryTypeormRepository } from './infra/typeorm/repositories/category-typeorm';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([CategoryORM])],
+    imports: [TypeOrmModule.forFeature([CategoryTypeorm])],
     controllers: [CategoriesController],
     providers: [
         CreateService,
         GetByIdService,
         ListService,
         {
-            provide: 'CategoryStoreGateway',
-            useClass: CategoryStoreTypeorm,
+            provide: 'CategoryRepository',
+            useClass: CategoryTypeormRepository,
         },
     ],
 })
