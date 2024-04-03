@@ -1,10 +1,10 @@
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
-import { ChangePasswordService } from '../services/change-password.service';
-import { CreateUserService } from '../services/create-user.service';
-import { GetByIdService } from '../services/get-by-id.service';
-import { UserCreateDto } from '../dtos/user.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags } from '@nestjs/swagger';
+import { ChangePasswordService } from '../../domain/services/change-password.service';
+import { CreateUserService } from '../../domain/services/create-user.service';
+import { GetByIdService } from '../../domain/services/get-by-id.service';
+import { UserCreateDto } from '../dtos/user-create.dto';
 
 @Controller('users')
 @ApiTags('Users')

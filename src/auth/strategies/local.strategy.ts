@@ -2,13 +2,13 @@ import { Inject, Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-local';
 import { compareSync } from 'bcrypt';
-import { IUserRepository } from 'src/user/gateways/interfaces/user-repository.interface';
+import { UserRepository } from '../../user/domain/repositories/user.repository';
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
     constructor(
-        @Inject('IUserRepository')
-        private readonly userRepository: IUserRepository,
+        @Inject('UserRepository')
+        private readonly userRepository: UserRepository,
     ) {
         super({ usernameField: 'email' });
     }

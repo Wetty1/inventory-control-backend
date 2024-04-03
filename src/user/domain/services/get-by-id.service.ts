@@ -1,11 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IUserRepository } from '../gateways/interfaces/user-repository.interface';
+import { UserRepository } from '../repositories/user.repository';
 
 @Injectable()
 export class GetByIdService {
     constructor(
-        @Inject('IUserRepository')
-        private readonly userRepository: IUserRepository,
+        @Inject('UserRepository')
+        private readonly userRepository: UserRepository,
     ) {}
 
     async execute(id: number) {

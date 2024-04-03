@@ -1,13 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CreateUserService } from './create-user.service';
-import { IUserRepository } from '../gateways/interfaces/user-repository.interface';
-import { UserMemoryRepository } from '../gateways/implementations/user-memory-repository';
 import { ChangePasswordService } from './change-password.service';
 import { GetByIdService } from './get-by-id.service';
+import { UserMemoryRepository } from '../../infra/memory/user-memory-repository';
+import { UserRepository } from '../repositories/user.repository';
 
 describe('CreateUserService', () => {
     let service: CreateUserService;
-    const userRepository: IUserRepository = new UserMemoryRepository();
+    const userRepository: UserRepository = new UserMemoryRepository();
 
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
@@ -16,7 +16,7 @@ describe('CreateUserService', () => {
                 GetByIdService,
                 CreateUserService,
                 {
-                    provide: 'IUserRepository',
+                    provide: 'UserRepository',
                     useValue: userRepository,
                 },
             ],
@@ -43,6 +43,7 @@ describe('CreateUserService', () => {
             name: 'John Doe',
             email: 'a@a.com',
             password: '123456',
+            hashPassword: () => {},
         });
         await expect(
             service.execute({

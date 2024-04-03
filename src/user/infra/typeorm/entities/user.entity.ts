@@ -1,9 +1,9 @@
 import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { hashSync } from 'bcrypt';
-import { UserModel } from 'src/user/dtos/user-entity';
+import { User } from '../../../../user/domain/entities/user';
 
 @Entity('users')
-export class UserTypeormEntity implements UserModel {
+export class UserTypeorm implements User {
     @PrimaryGeneratedColumn()
     id: number;
 

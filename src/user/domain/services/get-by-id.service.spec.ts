@@ -1,13 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ChangePasswordService } from './change-password.service';
 import { GetByIdService } from './get-by-id.service';
+import { ChangePasswordService } from './change-password.service';
 import { CreateUserService } from './create-user.service';
-import { IUserRepository } from '../gateways/interfaces/user-repository.interface';
-import { UserMemoryRepository } from '../gateways/implementations/user-memory-repository';
+import { UserMemoryRepository } from '../../infra/memory/user-memory-repository';
+import { UserRepository } from '../repositories/user.repository';
 
-describe('ChangePasswordService', () => {
-    let service: ChangePasswordService;
-    const userRepository: IUserRepository = new UserMemoryRepository();
+describe('GetByIdService', () => {
+    let service: GetByIdService;
+    const userRepository: UserRepository = new UserMemoryRepository();
 
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
@@ -16,27 +16,27 @@ describe('ChangePasswordService', () => {
                 GetByIdService,
                 CreateUserService,
                 {
-                    provide: 'IUserRepository',
+                    provide: 'UserRepository',
                     useValue: userRepository,
                 },
             ],
         }).compile();
 
-        service = module.get<ChangePasswordService>(ChangePasswordService);
+        service = module.get<GetByIdService>(GetByIdService);
     });
 
     it('should be defined', () => {
         expect(service).toBeDefined();
     });
 
-    it('should change password', async () => {
+    it('should get user by id', async () => {
         userRepository.createNewUser({
             name: 'John Doe',
             email: 'a@a.com',
             password: '123456',
+            hashPassword: () => {},
         });
-        await service.execute(1, '123457');
-        const user = await userRepository.getById(1);
-        expect(user.password).toEqual('123457');
+        const user = await service.execute(1);
+        expect(user.id).toBe(1);
     });
 });

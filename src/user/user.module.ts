@@ -1,24 +1,24 @@
 import { Module } from '@nestjs/common';
-import { UsersController } from './controllers/users.controller';
-import { CreateUserService } from './services/create-user.service';
-import { ChangePasswordService } from './services/change-password.service';
-import { GetByIdService } from './services/get-by-id.service';
-import { UserTypeormRepository } from './gateways/implementations/user-typeorm-repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserTypeormEntity } from './gateways/interfaces/user-typeorm.entity';
+import { ChangePasswordService } from './domain/services/change-password.service';
+import { CreateUserService } from './domain/services/create-user.service';
+import { GetByIdService } from './domain/services/get-by-id.service';
+import { UsersController } from './infra/controllers/users.controller';
+import { UserTypeorm } from './infra/typeorm/entities/user.entity';
+import { UserTypeormRepository } from './infra/typeorm/repositories/user-typeorm.repository';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([UserTypeormEntity])],
+    imports: [TypeOrmModule.forFeature([UserTypeorm])],
     controllers: [UsersController],
     providers: [
         CreateUserService,
         GetByIdService,
         ChangePasswordService,
         {
-            provide: 'IUserRepository',
+            provide: 'UserRepository',
             useClass: UserTypeormRepository,
         },
     ],
-    exports: ['IUserRepository'],
+    exports: ['UserRepository'],
 })
 export class UserModule {}
