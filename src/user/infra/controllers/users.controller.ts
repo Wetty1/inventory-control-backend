@@ -15,7 +15,7 @@ export class UsersController {
         private changePasswordService: ChangePasswordService,
     ) {}
 
-    @Post()
+    @Post('create')
     async create(@Body() body: UserCreateDto) {
         return this.createUserService.execute(body);
     }

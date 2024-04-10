@@ -7,6 +7,12 @@ export class ProductMemoryRepository implements ProductRepository {
     constructor() {
         this.products = [];
     }
+    listAllWithEvents(): Promise<Product[]> {
+        throw new Error('Method not implemented.');
+    }
+    async listAll(): Promise<Product[]> {
+        return Promise.resolve(this.products);
+    }
     async getProductsByCategory(categoryId: any): Promise<Product[]> {
         const products = this.products.filter(
             (product) => product.categoryId === categoryId,

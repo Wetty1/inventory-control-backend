@@ -32,9 +32,26 @@
 $ yarn install
 ```
 
+## Build database
+
+```bash
+# to up the database
+$ docker-compose up -d db
+```
+
+## Run migrations
+
+```bash
+# run all migrations
+$ yarn migration:up
+```
+
 ## Running the app
 
 ```bash
+# docker
+$ docker-compose up -d app 
+
 # development
 $ yarn run start
 

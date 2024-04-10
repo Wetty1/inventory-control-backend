@@ -7,6 +7,17 @@ export class EventMemoryRepository implements EventRepository {
     constructor() {
         this.events = [];
     }
+
+    async get(id: number): Promise<Event> {
+        const event = this.events.find((event) => event.id === id);
+        return Promise.resolve(event);
+    }
+
+    async update(event: Event): Promise<Event> {
+        const index = this.events.findIndex((event) => event.id === event.id);
+        this.events[index] = event;
+        return Promise.resolve(event);
+    }
     async delete(id: number): Promise<void> {
         this.events.splice(
             this.events.findIndex((event) => event.id === id),

@@ -7,6 +7,8 @@ import { GetBalanceByProductService } from './domain/services/get-balance-by-pro
 import { ListService } from './domain/services/list.service';
 import { EventsController } from './infra/controllers/events.controller';
 import { EventTypeormRepository } from './infra/typeorm/repositories/event-typeorm.repository';
+import { DeleteEventService } from './domain/services/delete-event.service';
+import { UpdateEventService } from './domain/services/update-event.service';
 
 @Module({
     imports: [TypeOrmModule.forFeature([EventTypeorm])],
@@ -20,6 +22,8 @@ import { EventTypeormRepository } from './infra/typeorm/repositories/event-typeo
         },
         ExtractByProductService,
         GetBalanceByProductService,
+        DeleteEventService,
+        UpdateEventService,
     ],
 })
 export class EventsModule {}
