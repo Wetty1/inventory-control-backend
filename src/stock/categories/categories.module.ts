@@ -6,6 +6,8 @@ import { ListService } from './domain/services/list.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CategoryTypeorm } from './infra/typeorm/entities/category.entity';
 import { CategoryTypeormRepository } from './infra/typeorm/repositories/category-typeorm';
+import { UpdateCategoryService } from './domain/services/update-category.service';
+import { DeleteCategoryService } from './domain/services/delete-category.service';
 
 @Module({
     imports: [TypeOrmModule.forFeature([CategoryTypeorm])],
@@ -18,6 +20,8 @@ import { CategoryTypeormRepository } from './infra/typeorm/repositories/category
             provide: 'CategoryRepository',
             useClass: CategoryTypeormRepository,
         },
+        UpdateCategoryService,
+        DeleteCategoryService,
     ],
 })
 export class CategoriesModule {}
