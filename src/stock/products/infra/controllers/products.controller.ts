@@ -18,6 +18,7 @@ import { ListProductByCategoryService } from '../../domain/services/list-product
 import { UpdateProductDto } from '../dto/update-product.dto';
 import { DeleteProductService } from '../../domain/services/delete.service';
 import { ListExtractProductService } from '../../domain/services/list-extract-product.service';
+import { GetOneProductService } from '../../domain/services/get-one-product.service';
 
 @Controller('stock/products')
 @UseGuards(AuthGuard('jwt'))
@@ -30,7 +31,17 @@ export class ProductsController {
         private readonly listProductsByCategoryService: ListProductByCategoryService,
         private readonly deleteProductsService: DeleteProductService,
         private readonly listExtractProductsService: ListExtractProductService,
+        private readonly getOneProductService: GetOneProductService,
     ) {}
+
+    @Get(':id')
+    async getById(@Param('id') id: string) {
+        try {
+            return this.getOneProductService.execute(id);
+        } catch (error) {
+            throw new Error('Error: ' + error);
+        }
+    }
 
     @Get('list')
     async list() {

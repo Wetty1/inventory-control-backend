@@ -18,7 +18,7 @@ Módulo de estoque
 - categorias
 
 ### Categoria ✅️
-f
+
 - [x] Desenvolver os controllers
 - [x] Listagem
 - [x] Pegar um
@@ -33,7 +33,7 @@ f
 - [X] Edição
 - [x] Deleção
 
-### Eventos 
+### Eventos
 
 - [x] Criar um evento
 - [x] Deleção
