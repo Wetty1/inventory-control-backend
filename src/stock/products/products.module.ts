@@ -9,6 +9,7 @@ import { ProductStoreTypeorm } from './infra/typeorm/repositories/product-store-
 import { ListProductService } from './domain/services/list-product.service';
 import { ListProductByCategoryService } from './domain/services/list-product-by-category.service';
 import { ListExtractProductService } from './domain/services/list-extract-product.service';
+import { GetOneProductService } from './domain/services/get-one-product.service';
 
 @Module({
     imports: [TypeOrmModule.forFeature([ProductTypeorm])],
@@ -24,6 +25,7 @@ import { ListExtractProductService } from './domain/services/list-extract-produc
         ListProductService,
         ListProductByCategoryService,
         ListExtractProductService,
+        GetOneProductService,
     ],
 })
 export class ProductsModule {}

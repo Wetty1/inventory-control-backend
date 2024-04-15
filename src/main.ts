@@ -11,6 +11,7 @@ async function bootstrap() {
         AppModule,
         new FastifyAdapter(),
     );
+    app.enableCors();
 
     const config = new DocumentBuilder()
         .setTitle('API de Gestão')

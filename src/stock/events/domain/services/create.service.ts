@@ -10,6 +10,9 @@ export class CreateService {
     ) {}
 
     async execute(event: Event): Promise<Event> {
+        if (event.type === 'saida') {
+            event.quantity * -1;
+        }
         await this.eventStore.create(event);
         return event;
     }

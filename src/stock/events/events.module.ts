@@ -25,5 +25,6 @@ import { UpdateEventService } from './domain/services/update-event.service';
         DeleteEventService,
         UpdateEventService,
     ],
+    exports: ['EventRepository'],
 })
 export class EventsModule {}

@@ -10,7 +10,9 @@ export class ProductStoreTypeorm implements ProductRepository {
         private readonly productRepository: Repository<ProductTypeorm>,
     ) {}
     async listAll(): Promise<Product[]> {
-        return this.productRepository.find();
+        return this.productRepository.find({
+            relations: ['events', 'category', 'purchases'],
+        });
     }
     async getProductsByCategory(categoryId: any): Promise<Product[]> {
         return this.productRepository.find({
@@ -18,7 +20,10 @@ export class ProductStoreTypeorm implements ProductRepository {
         });
     }
     async get(id: any): Promise<Product> {
-        return this.productRepository.findOne({ where: { id } });
+        return this.productRepository.findOne({
+            where: { id },
+            relations: ['events', 'events.purchase', 'category'],
+        });
     }
     async create(product: Product): Promise<Product> {
         const newProduct = this.productRepository.create(product);
