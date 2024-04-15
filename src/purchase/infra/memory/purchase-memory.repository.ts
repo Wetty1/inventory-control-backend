@@ -5,6 +5,9 @@ export class PurchaseMemoryRepository implements PurchaseRepository {
     purchases: Purchase[] = [];
 
     constructor() {}
+    update(purchase: Purchase): Promise<Purchase> {
+        throw new Error('Method not implemented.');
+    }
 
     async create(newPurchase: Purchase): Promise<Purchase> {
         this.purchases.push(newPurchase);

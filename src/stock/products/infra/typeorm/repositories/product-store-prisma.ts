@@ -9,20 +9,37 @@ export class ProductStoreTypeorm implements ProductRepository {
         @InjectRepository(ProductTypeorm)
         private readonly productRepository: Repository<ProductTypeorm>,
     ) {}
+    async listAll(): Promise<Product[]> {
+        return this.productRepository.find({
+            relations: ['events', 'category', 'purchases'],
+        });
+    }
     async getProductsByCategory(categoryId: any): Promise<Product[]> {
-        throw new Error('Method not implemented.');
+        return this.productRepository.find({
+            where: { categoryId },
+        });
     }
     async get(id: any): Promise<Product> {
-        throw new Error('Method not implemented.');
+        return this.productRepository.findOne({
+            where: { id },
+            relations: ['events', 'events.purchase', 'category'],
+        });
     }
     async create(product: Product): Promise<Product> {
         const newProduct = this.productRepository.create(product);
         return this.productRepository.save(newProduct);
     }
     async delete(id: any): Promise<void> {
-        throw new Error('Method not implemented.');
+        await this.productRepository.delete(id);
     }
     async update(product: Product): Promise<Product> {
-        throw new Error('Method not implemented.');
+        return this.productRepository.save(product);
+    }
+
+    async listAllWithEvents() {
+        return this.productRepository.find({
+            relations: ['events'],
+            select: ['id', 'name', 'events'],
+        });
     }
 }

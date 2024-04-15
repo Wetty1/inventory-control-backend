@@ -28,6 +28,11 @@ export class CreateTableEvents1711333524769 implements MigrationInterface {
                         type: 'bigint',
                     },
                     {
+                        name: 'purchaseId',
+                        type: 'bigint',
+                        isNullable: true,
+                    },
+                    {
                         name: 'quantity',
                         type: 'int',
                         isNullable: false,
@@ -52,21 +57,22 @@ export class CreateTableEvents1711333524769 implements MigrationInterface {
             }),
         );
 
-        const foreignKey = new TableForeignKey({
+        const productForeignKey = new TableForeignKey({
             columnNames: ['productId'],
             referencedColumnNames: ['id'],
             referencedTableName: 'products',
             onDelete: 'CASCADE',
         });
-        await queryRunner.createForeignKey('events', foreignKey);
+        await queryRunner.createForeignKey('events', productForeignKey);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
         const table = await queryRunner.getTable('events');
-        const foreignKey = table.foreignKeys.find(
+        const productForeignKey = table.foreignKeys.find(
             (fk) => fk.columnNames.indexOf('productId') !== -1,
         );
-        await queryRunner.dropForeignKey('events', foreignKey);
+        await queryRunner.dropForeignKey('events', productForeignKey);
+
         await queryRunner.dropTable('events');
     }
 }

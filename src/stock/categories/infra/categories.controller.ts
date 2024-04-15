@@ -1,10 +1,21 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Param,
+    Patch,
+    Post,
+    UseGuards,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateService } from '../domain/services/create.service';
 import { GetByIdService } from '../domain/services/get-by-id.service';
 import { ListService } from '../domain/services/list.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
+import { UpdateCategoryService } from '../domain/services/update-category.service';
+import { DeleteCategoryService } from '../domain/services/delete-category.service';
 
 @Controller('stock/categories')
 @UseGuards(AuthGuard('jwt'))
@@ -14,6 +25,8 @@ export class CategoriesController {
         private readonly listService: ListService,
         private readonly createService: CreateService,
         private readonly getByIdService: GetByIdService,
+        private readonly updateService: UpdateCategoryService,
+        private readonly deleteService: DeleteCategoryService,
     ) {}
 
     @Get('list')
@@ -29,5 +42,15 @@ export class CategoriesController {
     @Get(':id')
     async getById(@Param('id') id) {
         return this.getByIdService.execute(id);
+    }
+
+    @Patch(':id')
+    async update(@Param('id') id, @Body() body) {
+        return this.updateService.execute(id, body);
+    }
+
+    @Delete(':id')
+    async delete(@Param('id') id) {
+        return this.deleteService.execute(id);
     }
 }

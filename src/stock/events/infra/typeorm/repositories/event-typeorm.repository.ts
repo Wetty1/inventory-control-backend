@@ -9,6 +9,12 @@ export class EventTypeormRepository implements EventRepository {
         @InjectRepository(EventTypeorm)
         private readonly eventRepository: Repository<EventTypeorm>,
     ) {}
+    async get(id: number): Promise<Event> {
+        return this.eventRepository.findOne({ where: { id } });
+    }
+    async update(event: Event): Promise<Event> {
+        return this.eventRepository.save(event);
+    }
     async create(event: EventTypeorm): Promise<EventTypeorm> {
         const newEvent: EventTypeorm = {
             ...event,
@@ -53,10 +59,12 @@ export class EventTypeormRepository implements EventRepository {
         }
     }
 
-    delete(id: number): Promise<void> {
-        throw new Error('Method not implemented.');
+    async delete(id: number): Promise<void> {
+        await this.eventRepository.delete(id);
     }
-    list(): Promise<Event[]> {
-        throw new Error('Method not implemented.');
+    async list(): Promise<Event[]> {
+        return this.eventRepository.find({
+            order: { date: 'DESC' },
+        });
     }
 }

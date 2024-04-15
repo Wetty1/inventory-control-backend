@@ -1,6 +1,14 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+    Column,
+    Entity,
+    ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Product } from '../../../domain/entities/product';
 import { CategoryTypeorm } from 'src/stock/categories/infra/typeorm/entities/category.entity';
+import { EventTypeorm } from 'src/stock/events/infra/typeorm/entities/event.entity';
+import { PurchaseTypeorm } from 'src/purchase/infra/typeorm/entities/purchase.entity';
 
 @Entity('products')
 export class ProductTypeorm implements Product {
@@ -15,4 +23,10 @@ export class ProductTypeorm implements Product {
 
     @ManyToOne(() => CategoryTypeorm, (category) => category.products)
     category: CategoryTypeorm;
+
+    @OneToMany(() => EventTypeorm, (event) => event.product)
+    events: EventTypeorm[];
+
+    @OneToMany(() => PurchaseTypeorm, (purchase) => purchase.product)
+    purchases: PurchaseTypeorm[];
 }

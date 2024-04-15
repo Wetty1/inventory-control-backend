@@ -14,4 +14,8 @@ export class PurchaseTypeormRepository implements PurchaseRepository {
     async create(newPurchase: Purchase): Promise<Purchase> {
         return this.purchaseRepository.save(newPurchase);
     }
+    async update(purchase: Purchase): Promise<Purchase> {
+        await this.purchaseRepository.update(purchase.id, purchase);
+        return purchase;
+    }
 }
