@@ -33,7 +33,7 @@ Módulo de estoque
 - [X] Edição
 - [x] Deleção
 
-### Eventos
+### Eventos ✅️
 
 - [x] Criar um evento
 - [x] Deleção

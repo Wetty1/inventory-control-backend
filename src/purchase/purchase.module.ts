@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PurchaseTypeorm } from './infra/typeorm/entities/purchase.entity';
 import { PurchaseTypeormRepository } from './infra/typeorm/repositories/purchase-typeorm.repository';
 import { EventsModule } from 'src/stock/events/events.module';
+import { ListPurchaseService } from './domain/services/list-purchase.service';
 
 @Module({
     imports: [TypeOrmModule.forFeature([PurchaseTypeorm]), EventsModule],
@@ -15,6 +16,7 @@ import { EventsModule } from 'src/stock/events/events.module';
             provide: 'PurchaseRepository',
             useClass: PurchaseTypeormRepository,
         },
+        ListPurchaseService,
     ],
 })
 export class PurchaseModule {}
