@@ -40,12 +40,12 @@ export class CreateTablePurchases1711333534194 implements MigrationInterface {
                     },
                     {
                         name: 'unit_value',
-                        type: 'money',
+                        type: 'decimal',
                         isNullable: false,
                     },
                     {
                         name: 'total_value',
-                        type: 'money',
+                        type: 'decimal',
                         isNullable: false,
                     },
                     {

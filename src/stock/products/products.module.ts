@@ -10,6 +10,7 @@ import { ListProductService } from './domain/services/list-product.service';
 import { ListProductByCategoryService } from './domain/services/list-product-by-category.service';
 import { ListExtractProductService } from './domain/services/list-extract-product.service';
 import { GetOneProductService } from './domain/services/get-one-product.service';
+import { ListSummaryProductService } from './domain/services/list-summary-product.service';
 
 @Module({
     imports: [TypeOrmModule.forFeature([ProductTypeorm])],
@@ -26,6 +27,7 @@ import { GetOneProductService } from './domain/services/get-one-product.service'
         ListProductByCategoryService,
         ListExtractProductService,
         GetOneProductService,
+        ListSummaryProductService,
     ],
 })
 export class ProductsModule {}
