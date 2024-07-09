@@ -15,7 +15,7 @@ export class CreateTableRevenue1711333539315 implements MigrationInterface {
                     },
                     {
                         name: 'value',
-                        type: 'money',
+                        type: 'decimal',
                         isNullable: false,
                     },
                     {
