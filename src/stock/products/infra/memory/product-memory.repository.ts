@@ -7,6 +7,9 @@ export class ProductMemoryRepository implements ProductRepository {
     constructor() {
         this.products = [];
     }
+    listAllSummaries(): Promise<Product[]> {
+        throw new Error('Method not implemented.');
+    }
     listAllWithEvents(): Promise<Product[]> {
         throw new Error('Method not implemented.');
     }

@@ -10,10 +10,29 @@ export class ProductStoreTypeorm implements ProductRepository {
         private readonly productRepository: Repository<ProductTypeorm>,
     ) {}
     async listAll(): Promise<Product[]> {
-        return this.productRepository.find({
-            relations: ['events', 'category', 'purchases'],
-        });
+        return this.productRepository.find();
     }
+
+    async listAllSummaries(): Promise<any[]> {
+        return this.productRepository.query(`select 	
+            p.id,
+            p.name as name,
+            c.name as categoryName,
+            (select pur.unit_value
+                from purchases pur
+                order by pur."date" desc 
+                limit 1) as lastPrice,
+            (select 
+                (select coalesce(sum(quantity),0)
+                    from events e
+                    where e."productId" = p.id and e."type" = 'entrada') -
+                (select coalesce(sum(quantity),0)
+                    from events e
+                    where e."productId" = p.id and e."type" = 'saida')) as balance
+            from products p 
+            join categories c ON c.id = p."categoryId"`);
+    }
+
     async getProductsByCategory(categoryId: any): Promise<Product[]> {
         return this.productRepository.find({
             where: { categoryId },
