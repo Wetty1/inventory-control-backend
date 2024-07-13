@@ -6,6 +6,15 @@ export class RevenueMemoryRepository implements RevenueRepository {
     constructor() {
         this.revenues = [];
     }
+    delete(id: any): Promise<void> {
+        throw new Error('Method not implemented.');
+    }
+    list(): Promise<Revenue[]> {
+        throw new Error('Method not implemented.');
+    }
+    edit(revenue: Revenue): Promise<Revenue> {
+        throw new Error('Method not implemented.');
+    }
 
     async create(newRevenue: Revenue): Promise<Revenue> {
         this.revenues.push(newRevenue);

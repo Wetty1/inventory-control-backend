@@ -11,7 +11,7 @@ import {
 export class RevenueTypeorm implements Revenue {
     @PrimaryGeneratedColumn()
     id?: number;
-    @Column()
+    @Column({ type: 'float', precision: 10, scale: 2 })
     value: number;
     @Column()
     date: Date;
