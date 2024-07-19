@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { RevenueRepository } from '../repositories/revenue.repository';
+import { RevenueRepository } from '../repository/revenue.repository';
 
 @Injectable()
 export class DeleteRevenueService {

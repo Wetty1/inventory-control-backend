@@ -7,10 +7,11 @@ import {
     UpdateDateColumn,
 } from 'typeorm';
 
+type EntityRevenue = typeof Revenue.prototype;
 @Entity('revenue')
-export class RevenueTypeorm implements Revenue {
+export class RevenueTypeorm implements EntityRevenue {
     @PrimaryGeneratedColumn()
-    id?: number;
+    id: number;
     @Column({ type: 'float', precision: 10, scale: 2 })
     value: number;
     @Column()
