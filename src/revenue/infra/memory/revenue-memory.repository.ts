@@ -1,5 +1,5 @@
+import { RevenueRepository } from 'src/revenue/application/repository/revenue.repository';
 import { Revenue } from 'src/revenue/domain/entities/revenue';
-import { RevenueRepository } from 'src/revenue/domain/repositories/revenue.repository';
 
 export class RevenueMemoryRepository implements RevenueRepository {
     revenues: Revenue[];

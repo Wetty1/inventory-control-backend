@@ -1,9 +1,9 @@
 import { Revenue } from 'src/revenue/domain/entities/revenue';
-import { RevenueRepository } from 'src/revenue/domain/repositories/revenue.repository';
 import { Repository, And, MoreThanOrEqual, LessThanOrEqual } from 'typeorm';
 import { RevenueTypeorm } from '../entities/revenue.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
+import { RevenueRepository } from 'src/revenue/application/repository/revenue.repository';
 @Injectable()
 export class RevenueTypeormRepository implements RevenueRepository {
     constructor(

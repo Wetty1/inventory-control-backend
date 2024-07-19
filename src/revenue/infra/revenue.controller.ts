@@ -8,14 +8,14 @@ import {
     Post,
     Query,
 } from '@nestjs/common';
-import { CreateRevenueService } from '../domain/services/create-revenue.service';
 import { CreateRevenueDTO } from './dtos/create-revenue.dto';
 import { Revenue } from '../domain/entities/revenue';
 import { ApiTags } from '@nestjs/swagger';
-import { ListRevenueService } from '../domain/services/list-revenue.service';
-import { UpdateRevenueService } from '../domain/services/update-revenue.service';
-import { DeleteRevenueService } from '../domain/services/delete-revenue.service';
 import { UpdateRevenueDTO } from './dtos/update-revenue.dto';
+import { CreateRevenueService } from '../application/use-cases/create-revenue.service';
+import { DeleteRevenueService } from '../application/use-cases/delete-revenue.service';
+import { ListRevenueService } from '../application/use-cases/list-revenue.service';
+import { UpdateRevenueService } from '../application/use-cases/update-revenue.service';
 
 @Controller('revenue')
 @ApiTags('revenue')
