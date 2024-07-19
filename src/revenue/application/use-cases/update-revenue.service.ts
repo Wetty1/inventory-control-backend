@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { RevenueRepository } from '../repositories/revenue.repository';
 import { UpdateRevenueDTO } from 'src/revenue/infra/dtos/update-revenue.dto';
+import { RevenueRepository } from '../repository/revenue.repository';
 
 @Injectable()
 export class UpdateRevenueService {
