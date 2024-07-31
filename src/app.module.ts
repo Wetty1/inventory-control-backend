@@ -8,6 +8,7 @@ import { ConnectionFactory } from './shared/infra/typeorm/connection.factory';
 import { UserModule } from './user/user.module';
 import { PurchaseModule } from './purchase/purchase.module';
 import { RevenueModule } from './revenue/revenue.module';
+import { OrderModule } from './order/order.module';
 
 @Module({
     imports: [
@@ -23,6 +24,7 @@ import { RevenueModule } from './revenue/revenue.module';
         UserModule,
         PurchaseModule,
         RevenueModule,
+        OrderModule,
     ],
 })
 export class AppModule {}
