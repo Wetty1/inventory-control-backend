@@ -1,5 +1,5 @@
 import { Product } from './product';
 
 export interface ProductRepository {
-    saveProduct(product: any): Promise<Product>;
+    saveProduct(product: Product): Promise<Product>;
 }

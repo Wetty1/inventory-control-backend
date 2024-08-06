@@ -1,3 +1,5 @@
+import { randomUUID as uuid } from 'crypto';
+
 export class Product {
     private constructor(
         readonly id: string,
@@ -14,7 +16,7 @@ export class Product {
         quantity: number,
         category: string,
     ): Product {
-        const productId = crypto.randomUUID();
+        const productId = uuid();
         return new Product(
             productId,
             name,
