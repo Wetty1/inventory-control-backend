@@ -5,14 +5,14 @@ export class CreateProduct {
     constructor(private readonly productRepository: ProductRepository) {}
 
     async execute(input: Input): Promise<Output> {
+        const product = await this.productRepository.getByName(input.name);
+
+        product.isUnique(input.name);
+
         const output = await this.productRepository.saveProduct(
-            Product.create(
-                input.name,
-                input.price,
-                input.quantity,
-                input.category,
-            ),
+            Product.create(input.name, input.category),
         );
+
         return {
             id: output.id,
         };

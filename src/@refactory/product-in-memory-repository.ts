@@ -7,6 +7,18 @@ export class ProductInMemoryRepository implements ProductRepository {
     constructor() {
         this.products = [];
     }
+    async getByName(name: string): Promise<Product> {
+        const product = this.products.find(
+            (item) => item.name.getValue() == name,
+        );
+        Product.restore(
+            product.id,
+            product.name.getValue(),
+            product.category,
+            product.date,
+        );
+        return Promise.resolve(product);
+    }
 
     async saveProduct(product: any): Promise<Product> {
         const entity = Product.create(
