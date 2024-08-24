@@ -6,7 +6,7 @@ type Input = {
     numberPhone: string;
     address: string;
     date: Date;
-    items: string[];
+    items: any[];
 };
 
 type Output = {

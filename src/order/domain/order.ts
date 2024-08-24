@@ -1,3 +1,6 @@
+import crypto from 'crypto';
+import { OrderItem } from './order-item';
+
 export class Order {
     private constructor(
         readonly id: string,
@@ -5,7 +8,7 @@ export class Order {
         readonly numberPhone: string,
         readonly address: string,
         readonly date: Date,
-        readonly items: string[],
+        readonly items: OrderItem[],
     ) {}
 
     static create(
@@ -13,11 +16,9 @@ export class Order {
         numberPhone: string,
         address: string,
         date: Date,
-        items: string[],
+        items: OrderItem[],
     ) {
-        const orderId =
-            Math.random().toString(36).substring(2, 15) +
-            Math.random().toString(36).substring(2, 15);
+        const orderId = crypto.randomUUID();
         return new Order(orderId, total, numberPhone, address, date, items);
     }
 
@@ -27,7 +28,7 @@ export class Order {
         numberPhone: string,
         address: string,
         date: Date,
-        items: string[],
+        items: OrderItem[],
     ) {
         return new Order(id, total, numberPhone, address, date, items);
     }
