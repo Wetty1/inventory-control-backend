@@ -1,5 +1,6 @@
+import { Inject } from '@nestjs/common';
 import { Order } from '../domain/order';
-import { OrderRepository } from '../domain/order-repoository';
+import { OrderRepository } from '../domain/order-repository';
 
 type Input = {
     total: number;
@@ -13,19 +14,25 @@ type Output = {
     id: string;
 };
 
-export class CreateProduct {
-    constructor(private readonly orderRepository: OrderRepository) {}
+export class CreateOrderUseCase {
+    constructor(
+        @Inject('OrderRepository')
+        private readonly orderRepository: OrderRepository,
+    ) {}
 
     async execute(input: Input): Promise<Output> {
-        const output = await this.orderRepository.saveOrder(
-            Order.create(
-                input.total,
-                input.numberPhone,
-                input.address,
-                input.date,
-                input.items,
-            ),
+        const order = Order.create(
+            input.total,
+            input.numberPhone,
+            input.address,
+            input.date,
         );
+
+        for (const item of input.items) {
+            order.addItem(item);
+        }
+
+        const output = await this.orderRepository.saveOrder(order);
 
         return {
             id: output.id,
