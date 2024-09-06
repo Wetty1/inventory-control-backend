@@ -1,27 +1,24 @@
-import crypto from 'crypto';
-
 export class OrderItem {
     private constructor(
-        public readonly orderItemId: string,
-        public readonly productId: string,
+        public readonly id: string,
+        public readonly orderId: string,
         public readonly quantity: number,
-        public readonly description: number,
+        public readonly description: string,
         public readonly unitValue: number = 0,
         public readonly totalValue: number = 0,
     ) {}
 
     static create(
-        productId: string,
+        orderId: string,
         quantity: number,
-        description: number,
+        description: string,
         unitValue: number,
-        totalValue: number,
     ) {
-        const orderItemId = crypto.randomUUID();
-        totalValue = unitValue * quantity;
+        const id = crypto.randomUUID();
+        const totalValue = unitValue * quantity;
         return new OrderItem(
-            orderItemId,
-            productId,
+            id,
+            orderId,
             quantity,
             description,
             unitValue,
@@ -30,16 +27,16 @@ export class OrderItem {
     }
 
     static restore(
-        orderItemId: string,
-        productId: string,
+        id: string,
+        orderId: string,
         quantity: number,
-        description: number,
+        description: string,
         unitValue: number,
         totalValue: number,
     ) {
         return new OrderItem(
-            orderItemId,
-            productId,
+            id,
+            orderId,
             quantity,
             description,
             unitValue,
