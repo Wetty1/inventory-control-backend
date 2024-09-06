@@ -1,14 +1,15 @@
-import crypto from 'crypto';
 import { OrderItem } from './order-item';
 
 export class Order {
+    // private total: number;
+
     private constructor(
-        readonly id: string,
-        readonly total: number,
-        readonly numberPhone: string,
-        readonly address: string,
-        readonly date: Date,
-        readonly items: OrderItem[],
+        public readonly id: string,
+        public total: number = 0,
+        public numberPhone: string,
+        public address: string,
+        public date: Date,
+        public items: OrderItem[],
     ) {}
 
     static create(
@@ -16,10 +17,10 @@ export class Order {
         numberPhone: string,
         address: string,
         date: Date,
-        items: OrderItem[],
     ) {
-        const orderId = crypto.randomUUID();
-        return new Order(orderId, total, numberPhone, address, date, items);
+        const id = crypto.randomUUID();
+        const items: OrderItem[] = [];
+        return new Order(id, total, numberPhone, address, date, items);
     }
 
     static restore(
@@ -31,5 +32,29 @@ export class Order {
         items: OrderItem[],
     ) {
         return new Order(id, total, numberPhone, address, date, items);
+    }
+
+    addItem(item: {
+        orderId: string;
+        quantity: number;
+        description: string;
+        unitValue: number;
+    }) {
+        this.items.push(
+            OrderItem.create(
+                item.orderId,
+                item.quantity,
+                item.description,
+                item.unitValue,
+            ),
+        );
+    }
+
+    calculateTotal() {
+        let total = 0;
+        this.items.forEach((item) => {
+            total += item.totalValue;
+        });
+        this.total = total;
     }
 }
