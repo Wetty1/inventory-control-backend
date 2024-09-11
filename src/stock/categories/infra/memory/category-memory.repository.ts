@@ -1,5 +1,5 @@
-import { CategoryRepository } from '../../domain/repositories/category.repository';
-import { Category } from '../../domain/entities/category';
+import { CategoryRepository } from '../../domain/category.repository';
+import { Category } from '../../domain/category';
 
 export class CategoryMemoryRepository implements CategoryRepository {
     private categories: Category[];
@@ -7,10 +7,9 @@ export class CategoryMemoryRepository implements CategoryRepository {
         this.categories = [];
     }
 
-    async create(category: Category): Promise<Category> {
-        const categoryCreated = { ...category, id: this.categories.length + 1 };
-        this.categories.push(categoryCreated);
-        return categoryCreated;
+    async createOrUpdate(category: Category): Promise<Category> {
+        this.categories.push(category);
+        return category;
     }
     async delete(id: any): Promise<void> {
         const index = this.categories.findIndex(

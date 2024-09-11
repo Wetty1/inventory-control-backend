@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CreateService } from './create.service';
-import { CategoryMemoryRepository } from '../../infra/memory/category-memory.repository';
+import { GetByIdCategory } from './get-by-id';
+import { CategoryMemoryRepository } from '../infra/memory/category-memory.repository';
 
-describe('CreateService', () => {
-    let service: CreateService;
+describe('GetByIdService', () => {
+    let service: GetByIdCategory;
     const categoryStoreMemory = new CategoryMemoryRepository();
 
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                CreateService,
+                GetByIdCategory,
                 {
                     provide: 'CategoryRepository',
                     useValue: categoryStoreMemory,
@@ -17,14 +17,16 @@ describe('CreateService', () => {
             ],
         }).compile();
 
-        service = module.get<CreateService>(CreateService);
+        service = module.get<GetByIdCategory>(GetByIdCategory);
     });
 
     it('should be defined', () => {
         expect(service).toBeDefined();
     });
-    it('should create a new category', async () => {
-        const category = await service.execute({ name: 'test' });
+
+    it('should get a category by id', async () => {
+        categoryStoreMemory.createOrUpdate({ id: '1', name: 'test' });
+        const category = await service.execute('1');
         expect(category.name).toEqual('test');
     });
 });
