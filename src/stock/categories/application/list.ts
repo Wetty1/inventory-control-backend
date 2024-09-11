@@ -1,9 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Category } from '../entities/category';
-import { CategoryRepository } from '../repositories/category.repository';
+import { Category } from '../domain/category';
+import { CategoryRepository } from '../domain/category.repository';
 
 @Injectable()
-export class ListService {
+export class ListCategory {
     constructor(
         @Inject('CategoryRepository')
         private readonly categoryStore: CategoryRepository,

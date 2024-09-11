@@ -1,8 +1,8 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { Category } from '../../../domain/entities/category';
+import { Category } from '../../../domain/category';
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { CategoryRepository } from 'src/stock/categories/domain/repositories/category.repository';
+import { CategoryRepository } from 'src/stock/categories/domain/category.repository';
 import { CategoryTypeorm } from '../entities/category.entity';
 
 @Injectable()
@@ -12,18 +12,16 @@ export class CategoryTypeormRepository implements CategoryRepository {
         private readonly repository: Repository<CategoryTypeorm>,
     ) {}
 
-    async create(category: Category): Promise<Category> {
-        const categoryCreated = this.repository.create({
-            name: category.name,
-        });
-        return await this.repository.save(categoryCreated);
+    async createOrUpdate(category: Category): Promise<Category> {
+        const preparedCategory: CategoryTypeorm = new CategoryTypeorm();
+        preparedCategory.id = category.id;
+        preparedCategory.name = category.name;
+        const categoryCreated = await this.repository.save(preparedCategory);
+        return categoryCreated.toCategory();
     }
+
     async delete(id: any): Promise<void> {
         await this.repository.delete(id);
-    }
-    async update(category: Category): Promise<Category> {
-        await this.repository.update(category.id, category);
-        return category;
     }
 
     async getById(id: any): Promise<Category> {

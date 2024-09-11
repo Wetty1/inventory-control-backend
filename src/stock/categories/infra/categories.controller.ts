@@ -10,23 +10,23 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags } from '@nestjs/swagger';
-import { CreateService } from '../domain/services/create.service';
-import { GetByIdService } from '../domain/services/get-by-id.service';
-import { ListService } from '../domain/services/list.service';
+import { CreateCategory } from '../application/create-category';
+import { GetByIdCategory } from '../application/get-by-id';
+import { ListCategory } from '../application/list';
 import { CreateCategoryDto } from './dto/create-category.dto';
-import { UpdateCategoryService } from '../domain/services/update-category.service';
-import { DeleteCategoryService } from '../domain/services/delete-category.service';
+import { UpdateCategory } from '../application/update-category';
+import { DeleteCategory } from '../application/delete-category';
 
 @Controller('stock/categories')
 @UseGuards(AuthGuard('jwt'))
 @ApiTags('Stock-Categories')
 export class CategoriesController {
     constructor(
-        private readonly listService: ListService,
-        private readonly createService: CreateService,
-        private readonly getByIdService: GetByIdService,
-        private readonly updateService: UpdateCategoryService,
-        private readonly deleteService: DeleteCategoryService,
+        private readonly listService: ListCategory,
+        private readonly createService: CreateCategory,
+        private readonly getByIdService: GetByIdCategory,
+        private readonly updateService: UpdateCategory,
+        private readonly deleteService: DeleteCategory,
     ) {}
 
     @Get('list')
@@ -34,7 +34,7 @@ export class CategoriesController {
         return this.listService.execute();
     }
 
-    @Post('create')
+    @Post()
     async create(@Body() body: CreateCategoryDto) {
         return this.createService.execute(body);
     }

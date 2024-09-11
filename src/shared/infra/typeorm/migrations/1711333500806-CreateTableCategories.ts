@@ -10,8 +10,6 @@ export class CreateTableCategories1711333500806 implements MigrationInterface {
                         name: 'id',
                         type: 'bigint',
                         isPrimary: true,
-                        isGenerated: true,
-                        generationStrategy: 'increment',
                     },
                     {
                         name: 'name',

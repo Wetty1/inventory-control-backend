@@ -1,13 +1,13 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CategoryRepository } from '../repositories/category.repository';
+import { CategoryRepository } from '../domain/category.repository';
 
 @Injectable()
-export class DeleteCategoryService {
+export class DeleteCategory {
     constructor(
         @Inject('CategoryRepository')
         private readonly categoryRepository: CategoryRepository,
     ) {}
-    async execute(id) {
+    async execute(id: string) {
         return this.categoryRepository.delete(id);
     }
 }
