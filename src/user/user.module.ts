@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ChangePasswordService } from './domain/services/change-password.service';
-import { CreateUserService } from './domain/services/create-user.service';
-import { GetByIdService } from './domain/services/get-by-id.service';
+import { ChangeUserPassword } from './application/change-password';
+import { CreateUser } from './application/create-user';
+import { GetByIdService } from './application/get-by-id';
 import { UsersController } from './infra/controllers/users.controller';
 import { UserTypeorm } from './infra/typeorm/entities/user.entity';
 import { UserTypeormRepository } from './infra/typeorm/repositories/user-typeorm.repository';
@@ -11,9 +11,9 @@ import { UserTypeormRepository } from './infra/typeorm/repositories/user-typeorm
     imports: [TypeOrmModule.forFeature([UserTypeorm])],
     controllers: [UsersController],
     providers: [
-        CreateUserService,
+        CreateUser,
         GetByIdService,
-        ChangePasswordService,
+        ChangeUserPassword,
         {
             provide: 'UserRepository',
             useClass: UserTypeormRepository,

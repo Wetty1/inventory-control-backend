@@ -10,5 +10,7 @@ export const connectionSource = new DataSource({
     synchronize: false,
     logging: false,
     entities: [__dirname + '/src/modules/**/infra/typeorm/entities/*{.js,.ts}'],
-    migrations: [__dirname + '/src/shared/infra/typeorm/migrations/*{.js,.ts}'],
+    migrations: [
+        __dirname + '/src/@shared/infra/typeorm/migrations/*{.js,.ts}',
+    ],
 });

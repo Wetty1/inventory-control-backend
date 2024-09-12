@@ -1,13 +1,13 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { UserRepository } from '../repositories/user.repository';
+import { UserRepository } from '../domain/user.repository';
 
 @Injectable()
-export class ChangePasswordService {
+export class ChangeUserPassword {
     constructor(
         @Inject('UserRepository')
         private readonly userRepository: UserRepository,
     ) {}
-    async execute(id: number, newPassword: string) {
+    async execute(id: string, newPassword: string) {
         const user = await this.userRepository.getById(id);
         if (!user) {
             throw new Error('User not found');

@@ -1,11 +1,11 @@
-import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BeforeInsert, Column, Entity, PrimaryColumn } from 'typeorm';
 import { hashSync } from 'bcrypt';
-import { User } from '../../../../user/domain/entities/user';
+import { User } from '../../../../user/domain/user';
 
 @Entity('users')
-export class UserTypeorm implements User {
-    @PrimaryGeneratedColumn()
-    id: number;
+export class UserTypeorm {
+    @PrimaryColumn()
+    id: string;
 
     @Column()
     name: string;
@@ -19,5 +19,14 @@ export class UserTypeorm implements User {
     @BeforeInsert()
     hashPassword() {
         this.password = hashSync(this.password, 10);
+    }
+
+    static from(user: User) {
+        const userTypeorm = new UserTypeorm();
+        userTypeorm.id = user.id;
+        userTypeorm.name = user.name;
+        userTypeorm.email = user.email;
+        userTypeorm.password = user.password;
+        return userTypeorm;
     }
 }

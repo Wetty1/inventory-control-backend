@@ -1,18 +1,18 @@
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags } from '@nestjs/swagger';
-import { ChangePasswordService } from '../../domain/services/change-password.service';
-import { CreateUserService } from '../../domain/services/create-user.service';
-import { GetByIdService } from '../../domain/services/get-by-id.service';
+import { ChangeUserPassword } from '../../application/change-password';
+import { CreateUser } from '../../application/create-user';
+import { GetByIdService } from '../../application/get-by-id';
 import { UserCreateDto } from '../dtos/user-create.dto';
 
 @Controller('users')
 @ApiTags('Users')
 export class UsersController {
     constructor(
-        private createUserService: CreateUserService,
+        private createUserService: CreateUser,
         private getByIdService: GetByIdService,
-        private changePasswordService: ChangePasswordService,
+        private changePasswordService: ChangeUserPassword,
     ) {}
 
     @Post('create')
