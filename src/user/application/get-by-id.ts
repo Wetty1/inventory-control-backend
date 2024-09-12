@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { UserRepository } from '../repositories/user.repository';
+import { UserRepository } from '../domain/user.repository';
 
 @Injectable()
 export class GetByIdService {
@@ -8,7 +8,7 @@ export class GetByIdService {
         private readonly userRepository: UserRepository,
     ) {}
 
-    async execute(id: number) {
+    async execute(id: string) {
         const user = await this.userRepository.getById(id);
         if (!user) {
             throw new Error('User not found');

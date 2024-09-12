@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-local';
 import { compareSync } from 'bcrypt';
-import { UserRepository } from '../../user/domain/repositories/user.repository';
+import { UserRepository } from '../../user/domain/user.repository';
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
