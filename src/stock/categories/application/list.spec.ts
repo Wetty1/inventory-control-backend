@@ -25,10 +25,10 @@ describe('ListService', () => {
     });
 
     it('should list all categories', async () => {
-        categoryStoreMemory.createOrUpdate({ id: '1', name: 'test' });
-        categoryStoreMemory.createOrUpdate({ id: '2', name: 'test2' });
-        categoryStoreMemory.createOrUpdate({ id: '3', name: 'test3' });
-        categoryStoreMemory.createOrUpdate({ id: '4', name: 'john doe' });
+        categoryStoreMemory.save({ id: '1', name: 'test' });
+        categoryStoreMemory.save({ id: '2', name: 'test2' });
+        categoryStoreMemory.save({ id: '3', name: 'test3' });
+        categoryStoreMemory.save({ id: '4', name: 'john doe' });
         const categories = await service.execute();
         expect(categories).toHaveLength(4);
         expect(categories[2].name).toEqual('test3');

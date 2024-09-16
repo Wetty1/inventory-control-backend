@@ -1,13 +1,13 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ProductRepository } from '../Repositories/product.repository';
+import { ProductRepository } from '../domain/product.repository';
 
 @Injectable()
-export class ListSummaryProductService {
+export class ListProduct {
     constructor(
         @Inject('ProductRepository')
         private readonly productRepository: ProductRepository,
     ) {}
     async execute() {
-        return this.productRepository.listAllSummaries();
+        return this.productRepository.listAll();
     }
 }

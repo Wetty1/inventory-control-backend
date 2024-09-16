@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ProductRepository } from '../Repositories/product.repository';
+import { ProductRepository } from '../domain/product.repository';
 
 @Injectable()
-export class ListExtractProductService {
+export class ListExtractProduct {
     constructor(
         @Inject('ProductRepository')
         private readonly productRepository: ProductRepository,

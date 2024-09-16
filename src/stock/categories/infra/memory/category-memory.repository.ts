@@ -7,7 +7,7 @@ export class CategoryMemoryRepository implements CategoryRepository {
         this.categories = [];
     }
 
-    async createOrUpdate(category: Category): Promise<Category> {
+    async save(category: Category): Promise<Category> {
         this.categories.push(category);
         return category;
     }

@@ -1,16 +1,17 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductTypeorm } from './infra/typeorm/entities/product.entity';
-import { CreateService } from './domain/services/create.service';
-import { DeleteProductService } from './domain/services/delete.service';
-import { UpdateService } from './domain/services/update.service';
 import { ProductsController } from './infra/controllers/products.controller';
-import { ProductStoreTypeorm } from './infra/typeorm/repositories/product-store-prisma';
-import { ListProductService } from './domain/services/list-product.service';
-import { ListProductByCategoryService } from './domain/services/list-product-by-category.service';
-import { ListExtractProductService } from './domain/services/list-extract-product.service';
-import { GetOneProductService } from './domain/services/get-one-product.service';
-import { ListSummaryProductService } from './domain/services/list-summary-product.service';
+import { ProductStoreTypeorm } from './infra/typeorm/repositories/product.repository';
+
+import { CreateProduct } from './application/create';
+import { DeleteProduct } from './application/delete';
+import { UpdateProduct } from './application/update';
+import { ListProduct } from './application/list-product';
+import { ListProductByCategory } from './application/list-product-by-category';
+import { ListExtractProduct } from './application/list-extract-product';
+import { GetOneProduct } from './application/get-one-product';
+import { ListSummaryProduct } from './application/list-summary-product';
 
 @Module({
     imports: [TypeOrmModule.forFeature([ProductTypeorm])],
@@ -20,14 +21,14 @@ import { ListSummaryProductService } from './domain/services/list-summary-produc
             provide: 'ProductRepository',
             useClass: ProductStoreTypeorm,
         },
-        CreateService,
-        UpdateService,
-        DeleteProductService,
-        ListProductService,
-        ListProductByCategoryService,
-        ListExtractProductService,
-        GetOneProductService,
-        ListSummaryProductService,
+        CreateProduct,
+        UpdateProduct,
+        DeleteProduct,
+        ListProduct,
+        ListProductByCategory,
+        ListExtractProduct,
+        GetOneProduct,
+        ListSummaryProduct,
     ],
 })
 export class ProductsModule {}

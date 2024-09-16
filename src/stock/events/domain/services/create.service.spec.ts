@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CreateService } from './create.service';
+import { CreateService } from './create';
 import { EventRepository } from '../repositories/event-store-gateway.interface';
 import { ProductRepository } from '../../../products/domain/Repositories/product.repository';
 import { ProductMemoryRepository } from '../../../products/infra/memory/product-memory.repository';

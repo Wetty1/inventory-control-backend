@@ -29,7 +29,7 @@ describe('DeleteCategoryService', () => {
             id: 'id',
         };
 
-        categoryStoreMemory.createOrUpdate({ id: input.id, name: 'test' });
+        categoryStoreMemory.save({ id: input.id, name: 'test' });
 
         await service.execute(input.id);
 
