@@ -12,7 +12,7 @@ export class CreateCategory {
     async execute(input: any): Promise<Category> {
         const newCategory = Category.create(input.name);
         const createdCategory =
-            await this.categoryStore.createOrUpdate(newCategory);
+            await this.categoryStore.save(newCategory);
         return createdCategory;
     }
 }

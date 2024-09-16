@@ -25,7 +25,7 @@ describe('GetByIdService', () => {
     });
 
     it('should get a category by id', async () => {
-        categoryStoreMemory.createOrUpdate({ id: '1', name: 'test' });
+        categoryStoreMemory.save({ id: '1', name: 'test' });
         const category = await service.execute('1');
         expect(category.name).toEqual('test');
     });

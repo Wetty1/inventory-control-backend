@@ -30,7 +30,7 @@ describe('UpdateCategoryService', () => {
             name: 'test1',
         };
 
-        categoryStoreMemory.createOrUpdate({ id: input.id, name: 'test' });
+        categoryStoreMemory.save({ id: input.id, name: 'test' });
 
         await service.execute(input.id, input);
 

@@ -1,17 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CreateService } from './create.service';
-import { Product } from '../entities/product';
-import { ProductMemoryRepository } from '../../infra/memory/product-memory.repository';
+import { CreateProduct } from './create';
+import { Product } from '../domain/product';
+import { ProductMemoryRepository } from '../infra/memory/product-memory.repository';
 
 describe('CreateService', () => {
-    let service: CreateService;
+    let service: CreateProduct;
     const productStoreGateway: ProductMemoryRepository =
         new ProductMemoryRepository();
 
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                CreateService,
+                CreateProduct,
                 {
                     provide: 'ProductRepository',
                     useValue: productStoreGateway,
@@ -19,7 +19,7 @@ describe('CreateService', () => {
             ],
         }).compile();
 
-        service = module.get<CreateService>(CreateService);
+        service = module.get<CreateProduct>(CreateProduct);
     });
 
     it('should be defined', () => {

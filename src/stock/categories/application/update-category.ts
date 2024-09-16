@@ -10,6 +10,6 @@ export class UpdateCategory {
     async execute(id, data) {
         const category = await this.categoryRepository.getById(id);
         Object.assign(category, data);
-        return this.categoryRepository.createOrUpdate(category);
+        return this.categoryRepository.save(category);
     }
 }

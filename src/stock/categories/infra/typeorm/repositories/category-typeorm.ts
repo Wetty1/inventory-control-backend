@@ -12,7 +12,7 @@ export class CategoryTypeormRepository implements CategoryRepository {
         private readonly repository: Repository<CategoryTypeorm>,
     ) {}
 
-    async createOrUpdate(category: Category): Promise<Category> {
+    async save(category: Category): Promise<Category> {
         const preparedCategory: CategoryTypeorm = new CategoryTypeorm();
         preparedCategory.id = category.id;
         preparedCategory.name = category.name;
