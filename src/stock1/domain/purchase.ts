@@ -1,15 +1,15 @@
-import { Moviment } from './moviment';
+import { Movement } from './movement';
 import { Supply } from './supply';
 
 export class Purchase {
     private constructor(
         public readonly id: string,
-        public readonly date: Date,
-        public readonly supply: Supply,
-        public readonly moviment: Moviment,
-        public readonly quantity: number,
-        public readonly unitValue: number,
-        public readonly totalValue: number,
+        public date: Date,
+        public supply: Supply,
+        public readonly movement: Movement,
+        public quantity: number,
+        public unitValue: number,
+        public totalValue: number,
     ) {}
 
     static create(
@@ -19,14 +19,14 @@ export class Purchase {
         unitValue: number,
     ) {
         const id = crypto.randomUUID();
-        const moviment = Moviment.create(date, supply, quantity, 'in');
+        const movement = Movement.create(date, supply, quantity, 'in');
         const totalValue = quantity * unitValue;
 
         return new Purchase(
             id,
             date,
             supply,
-            moviment,
+            movement,
             quantity,
             unitValue,
             totalValue,
@@ -38,7 +38,7 @@ export class Purchase {
         date: Date,
         supply: Supply,
         quantity: number,
-        moviment: Moviment,
+        movement: Movement,
         unitValue: number,
         totalValue: number,
     ) {
@@ -46,10 +46,22 @@ export class Purchase {
             id,
             date,
             supply,
-            moviment,
+            movement,
             quantity,
             unitValue,
             totalValue,
         );
+    }
+
+    change(quantity: number, unitValue: number, date: Date) {
+        this.quantity = quantity;
+        this.unitValue = unitValue;
+        this.date = date;
+
+        this.totalValue = quantity * unitValue;
+    }
+
+    changeSupply(supply: Supply) {
+        this.supply = supply;
     }
 }

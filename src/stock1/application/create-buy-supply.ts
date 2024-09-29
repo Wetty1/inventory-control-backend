@@ -1,5 +1,5 @@
 import { Inject } from '@nestjs/common';
-import { MovimentRepository } from '../domain/moviment.repository';
+import { MovementRepository } from '../domain/movement.repository';
 import { Purchase } from '../domain/purchase';
 import { PurchaseRepository } from '../domain/purchase.repository';
 import { SupplyRepository } from '../domain/supply.repository';
@@ -20,7 +20,7 @@ interface Output {
         categoryId: string;
     };
     quantity: number;
-    moviment: {
+    movement: {
         id: string;
         date: Date;
         quantity: number;
@@ -36,8 +36,8 @@ export class CreateBuySupply {
         private readonly supplyRepository: SupplyRepository,
         @Inject('PurchaseRepository')
         private readonly purchaseRepository: PurchaseRepository,
-        @Inject('MovimentRepository')
-        private readonly movimentRepository: MovimentRepository,
+        @Inject('MovementRepository')
+        private readonly movementRepository: MovementRepository,
     ) {}
 
     async execute(input: Input): Promise<Output> {

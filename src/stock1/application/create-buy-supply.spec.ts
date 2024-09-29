@@ -1,14 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CreateBuySupply } from './create-buy-supply';
 import { SupplyInMemoryRepository } from '../infra/database/in-memory/supply.repository';
-import { MovimentInMemoryRepository } from '../infra/database/in-memory/moviment.repository';
+import { MovementInMemoryRepository } from '../infra/database/in-memory/movement.repository';
 import { PurchaseInMemoryRepository } from '../infra/database/in-memory/purchase.repository';
 import { Supply } from '../domain/supply';
 
 describe('CreateBuySupply', () => {
     let service: CreateBuySupply;
     const supplyRepository = new SupplyInMemoryRepository();
-    const movimentRepository = new MovimentInMemoryRepository();
+    const movementRepository = new MovementInMemoryRepository();
     const purchaseRepository = new PurchaseInMemoryRepository();
 
     beforeEach(async () => {
@@ -24,8 +24,8 @@ describe('CreateBuySupply', () => {
                     useValue: purchaseRepository,
                 },
                 {
-                    provide: 'MovimentRepository',
-                    useValue: movimentRepository,
+                    provide: 'MovementRepository',
+                    useValue: movementRepository,
                 },
             ],
         }).compile();
@@ -59,9 +59,9 @@ describe('CreateBuySupply', () => {
 
         const output = await service.execute(input);
 
-        const movimentFound = movimentRepository.get(output.moviment.id);
+        const movementFound = movementRepository.get(output.movement.id);
 
-        expect(movimentFound).toBeTruthy();
+        expect(movementFound).toBeTruthy();
     });
 
     it('deve criar uma compra de estoque', async () => {
@@ -77,7 +77,7 @@ describe('CreateBuySupply', () => {
 
         const output = await service.execute(input);
 
-        const purchaseFound = purchaseRepository.get(output.moviment.id);
+        const purchaseFound = purchaseRepository.get(output.movement.id);
 
         expect(purchaseFound).toBeTruthy();
     });

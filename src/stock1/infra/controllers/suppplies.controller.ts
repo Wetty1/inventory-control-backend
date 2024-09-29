@@ -1,6 +1,6 @@
 import { Get } from '@nestjs/common';
 
-export class MovimentsController {
+export class MovementsController {
     constructor() {}
 
     @Get()
