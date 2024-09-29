@@ -5,7 +5,7 @@ import {
     OneToMany,
     PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Product } from '../../../domain/entities/product';
+import { Product } from '../../../domain/product';
 import { CategoryTypeorm } from 'src/stock/categories/infra/typeorm/entities/category.entity';
 import { EventTypeorm } from 'src/stock/events/infra/typeorm/entities/event.entity';
 import { PurchaseTypeorm } from 'src/purchase/infra/typeorm/entities/purchase.entity';
@@ -13,7 +13,7 @@ import { PurchaseTypeorm } from 'src/purchase/infra/typeorm/entities/purchase.en
 @Entity('products')
 export class ProductTypeorm implements Product {
     @PrimaryGeneratedColumn()
-    id: number;
+    id: string;
 
     @Column()
     name: string;

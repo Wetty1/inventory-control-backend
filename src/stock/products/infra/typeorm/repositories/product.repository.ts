@@ -1,8 +1,8 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { Product } from '../../../domain/entities/product';
+import { Product } from '../../../domain/product';
 import { Repository } from 'typeorm';
-import { ProductRepository } from 'src/stock/products/domain/Repositories/product.repository';
-import { ProductTypeorm } from '../product.entity';
+import { ProductRepository } from 'src/stock/products/domain/product.repository';
+import { ProductTypeorm } from '../entities/product.entity';
 
 export class ProductStoreTypeorm implements ProductRepository {
     constructor(
@@ -10,7 +10,13 @@ export class ProductStoreTypeorm implements ProductRepository {
         private readonly productRepository: Repository<ProductTypeorm>,
     ) {}
     async listAll(): Promise<Product[]> {
-        return this.productRepository.find();
+        return (await this.productRepository.find()).map((product) => {
+            return Product.restore(
+                product.id,
+                product.name,
+                product.categoryId,
+            );
+        });
     }
 
     async listAllSummaries(): Promise<any[]> {

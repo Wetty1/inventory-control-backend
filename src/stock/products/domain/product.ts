@@ -1,5 +1,3 @@
-import { Category } from 'src/stock/categories/domain/category';
-
 export class Product {
     private constructor(
         public readonly id: string,
