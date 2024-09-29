@@ -7,6 +7,10 @@ export class SupplyInMemoryRepository implements SupplyRepository {
     constructor() {
         this.supplies = [];
     }
+
+    async list(): Promise<Supply[]> {
+        return Promise.resolve(this.supplies);
+    }
     async getByName(name: string): Promise<Supply> {
         const supply = this.supplies.find((supply) => supply.name === name);
         return Promise.resolve(supply);
