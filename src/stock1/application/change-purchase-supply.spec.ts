@@ -1,11 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ChangeBuySupply } from './change-buy-supply';
+import { ChangePurchaseSupply } from './change-purchase-supply';
 import { SupplyInMemoryRepository } from '../infra/database/in-memory/supply.repository';
 import { PurchaseInMemoryRepository } from '../infra/database/in-memory/purchase.repository';
 import { MovementInMemoryRepository } from '../infra/database/in-memory/movement.repository';
 import { Supply } from '../domain/supply';
 import { Movement } from '../domain/movement';
 import { Purchase } from '../domain/purchase';
+import { Supplier } from '../domain/supplier';
+import { SupplierInMemoryRepository } from '../infra/database/in-memory/supplier.repository';
 
 interface Input {
     id: string;
@@ -16,10 +18,11 @@ interface Input {
 }
 
 describe('ChangeBuySupply', () => {
-    let service: ChangeBuySupply;
+    let service: ChangePurchaseSupply;
     const supplyRepository = new SupplyInMemoryRepository();
     const purchaseRepository = new PurchaseInMemoryRepository();
     const movementRepository = new MovementInMemoryRepository();
+    const supplierRepository = new SupplierInMemoryRepository();
 
     let purchaseIdCreated: string;
     let supplyIdCreated: string;
@@ -27,7 +30,7 @@ describe('ChangeBuySupply', () => {
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                ChangeBuySupply,
+                ChangePurchaseSupply,
                 {
                     provide: 'SupplyRepository',
                     useValue: supplyRepository,
@@ -43,14 +46,22 @@ describe('ChangeBuySupply', () => {
             ],
         }).compile();
 
-        service = module.get<ChangeBuySupply>(ChangeBuySupply);
+        service = module.get<ChangePurchaseSupply>(ChangePurchaseSupply);
 
         const supply = Supply.create('arroz', 'id da categoria');
         supply.incrementQuantity(10);
         supplyRepository.save(supply);
         const movement = Movement.create(new Date(), supply, 20, 'out');
         movementRepository.save(movement);
-        const purchase = Purchase.create(new Date(), supply, 10, 3.99);
+        const supplier = Supplier.create('Fornecedor 1');
+        supplierRepository.save(supplier);
+        const purchase = Purchase.create(
+            new Date(),
+            supply,
+            10,
+            3.99,
+            supplier,
+        );
         purchaseRepository.save(purchase);
 
         purchaseIdCreated = purchase.id;
