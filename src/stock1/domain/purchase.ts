@@ -1,4 +1,5 @@
 import { Movement } from './movement';
+import { Supplier } from './supplier';
 import { Supply } from './supply';
 
 export class Purchase {
@@ -10,6 +11,7 @@ export class Purchase {
         public quantity: number,
         public unitValue: number,
         public totalValue: number,
+        public supplier: Supplier,
     ) {}
 
     static create(
@@ -17,6 +19,7 @@ export class Purchase {
         supply: Supply,
         quantity: number,
         unitValue: number,
+        supplier: Supplier,
     ) {
         const id = crypto.randomUUID();
         const movement = Movement.create(date, supply, quantity, 'in');
@@ -30,6 +33,7 @@ export class Purchase {
             quantity,
             unitValue,
             totalValue,
+            supplier,
         );
     }
 
@@ -41,6 +45,7 @@ export class Purchase {
         movement: Movement,
         unitValue: number,
         totalValue: number,
+        supplier: Supplier,
     ) {
         return new Purchase(
             id,
@@ -50,6 +55,7 @@ export class Purchase {
             quantity,
             unitValue,
             totalValue,
+            supplier,
         );
     }
 
