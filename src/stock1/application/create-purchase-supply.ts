@@ -9,6 +9,7 @@ interface Input {
     supplyId: string;
     quantity: number;
     date: Date;
+    supplierId: string;
 }
 
 interface Output {
@@ -30,7 +31,7 @@ interface Output {
     totalValue: number;
 }
 
-export class CreateBuySupply {
+export class CreatePurchaseSupply {
     constructor(
         @Inject('SupplyRepository')
         private readonly supplyRepository: SupplyRepository,
@@ -38,6 +39,8 @@ export class CreateBuySupply {
         private readonly purchaseRepository: PurchaseRepository,
         @Inject('MovementRepository')
         private readonly movementRepository: MovementRepository,
+        @Inject('SupplierRepository')
+        private readonly supplierRepository: SupplyRepository,
     ) {}
 
     async execute(input: Input): Promise<Output> {
@@ -45,6 +48,11 @@ export class CreateBuySupply {
 
         if (!supply) {
             throw new Error('Supply not found');
+        }
+
+        const supplier = await this.supplierRepository.get(input.supplierId);
+        if (!supplier) {
+            throw new Error('Supplier not found');
         }
 
         supply.incrementQuantity(input.quantity);
@@ -55,6 +63,7 @@ export class CreateBuySupply {
             supply,
             input.quantity,
             input.unitValue,
+            supplier,
         );
 
         const output = this.purchaseRepository.save(purchase);
