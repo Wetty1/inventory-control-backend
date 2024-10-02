@@ -31,7 +31,7 @@ interface Output {
 }
 
 @Injectable()
-export class ChangeBuySupply {
+export class ChangePurchaseSupply {
     constructor(
         @Inject('SupplyRepository')
         private readonly supplyRepository: SupplyRepository,
