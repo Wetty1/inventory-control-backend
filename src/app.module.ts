@@ -6,7 +6,6 @@ import { ConfigModule } from '@nestjs/config';
 import { SharedModule } from './@shared/shared.module';
 import { ConnectionFactory } from './@shared/infra/typeorm/connection.factory';
 import { UserModule } from './user/user.module';
-import { PurchaseModule } from './purchase/purchase.module';
 import { RevenueModule } from './revenue/revenue.module';
 import { OrderModule } from './order/order.module';
 import { LoggingInterceptor } from './@shared/interceptors/logging.interceptor';
@@ -23,7 +22,6 @@ import { LoggingInterceptor } from './@shared/interceptors/logging.interceptor';
         StockModule,
         AuthModule,
         UserModule,
-        PurchaseModule,
         RevenueModule,
         OrderModule,
     ],
