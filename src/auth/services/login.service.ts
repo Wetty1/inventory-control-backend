@@ -7,7 +7,10 @@ export class LoginService {
     constructor(private readonly jwtService: JwtService) {}
 
     async execute(user: User) {
-        const token = this.jwtService.sign({ sub: user.id, email: user.email });
+        const token = this.jwtService.sign({
+            sub: user.getId(),
+            email: user.getEmail(),
+        });
 
         return { token };
     }

@@ -1,5 +1,5 @@
 import { User } from '../../domain/user';
-import { UserRepository } from '../../domain/user.repository';
+import { UserRepository } from '../../application/repository/user.repository';
 
 export class UserMemoryRepository implements UserRepository {
     private users: User[] = [];
@@ -8,17 +8,26 @@ export class UserMemoryRepository implements UserRepository {
         this.users = [];
     }
     async createNewUser(user: User): Promise<User> {
-        this.users.push(user);
-        return user;
+        const id = this.users.length + 1;
+        const userCreated = User.restore(
+            id,
+            user.getName(),
+            user.getPassword(),
+            user.getEmail(),
+            user.getRole(),
+            user.getStatus(),
+        );
+        this.users.push(userCreated);
+        return userCreated;
     }
     async getByEmail(email: string): Promise<User> {
-        return this.users.find((u) => u.email === email);
+        return this.users.find((u) => u.getEmail() === email);
     }
-    async getById(id: string): Promise<User> {
-        return this.users.find((u) => u.id === id);
+    async getById(id: number): Promise<User> {
+        return this.users.find((u) => u.getId() === id);
     }
-    async changePassword(id: string, password: string): Promise<void> {
+    async changePassword(id: number, password: string): Promise<void> {
         const user = await this.getById(id);
-        user.password = password;
+        user.changePassword(password);
     }
 }
