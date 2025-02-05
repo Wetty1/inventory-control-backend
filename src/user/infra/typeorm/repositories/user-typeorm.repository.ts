@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserTypeorm } from '../entities/user.entity';
 import { User } from 'src/user/domain/user';
-import { UserRepository } from 'src/user/domain/user.repository';
+import { UserRepository } from 'src/user/application/repository/user.repository';
 
 @Injectable()
 export class UserTypeormRepository implements UserRepository {
@@ -13,22 +13,20 @@ export class UserTypeormRepository implements UserRepository {
     ) {}
     async createNewUser(user: User): Promise<User> {
         const newUser = UserTypeorm.from(user);
-
-        const newUserPrepared = this.userRepository.create(newUser);
-        console.log(newUserPrepared);
-        return this.userRepository.save(newUserPrepared);
+        const userSaved = await this.userRepository.save(newUser);
+        return UserTypeorm.to(userSaved);
     }
-    async getById(id: string): Promise<User> {
+    async getById(id: number): Promise<User> {
         const user = await this.userRepository.findOne({ where: { id } });
-        return user;
+        return UserTypeorm.to(user);
     }
-    async changePassword(id: string, password: string): Promise<void> {
+    async changePassword(id: number, password: string): Promise<void> {
         const user = await this.getById(id);
         user.password = password;
         await this.userRepository.save(user);
     }
     async getByEmail(email: string): Promise<User> {
         const user = await this.userRepository.findOne({ where: { email } });
-        return user;
+        return UserTypeorm.to(user);
     }
 }
