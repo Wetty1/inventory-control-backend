@@ -22,8 +22,8 @@ export class UserTypeormRepository implements UserRepository {
     }
     async changePassword(id: number, password: string): Promise<void> {
         const user = await this.getById(id);
-        user.password = password;
-        await this.userRepository.save(user);
+        user.changePassword(password);
+        await this.userRepository.save(UserTypeorm.from(user));
     }
     async getByEmail(email: string): Promise<User> {
         const user = await this.userRepository.findOne({ where: { email } });

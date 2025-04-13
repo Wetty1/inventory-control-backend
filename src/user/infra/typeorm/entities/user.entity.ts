@@ -29,12 +29,12 @@ export class UserTypeorm {
 
     static from(user: User): UserTypeorm {
         const userTypeorm = new UserTypeorm();
-        userTypeorm.id = user.id;
-        userTypeorm.name = user.name;
-        userTypeorm.email = user.email;
-        userTypeorm.password = user.password;
-        userTypeorm.role = user.role;
-        userTypeorm.status = user.status;
+        userTypeorm.id = user.getId();
+        userTypeorm.name = user.getName();
+        userTypeorm.email = user.getEmail();
+        userTypeorm.password = user.getPassword();
+        userTypeorm.role = user.getRole();
+        userTypeorm.status = user.getStatus();
         return userTypeorm;
     }
 
