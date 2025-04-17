@@ -1,10 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { Login } from '../application/usecase/login';
+import { Login } from '../../application/usecase/login';
 import { JwtModule } from '@nestjs/jwt';
 import { CreateUser } from 'src/user/application/usecase/create-user';
-import { UserTypeormRepository } from 'src/user/infra/typeorm/repositories/user-typeorm.repository';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserTypeorm } from 'src/user/infra/typeorm/entities/user.entity';
+import { UserMemoryRepository } from 'src/user/infra/memory/user-memory-repository';
 
 describe('Login', () => {
     let service: Login;
@@ -14,17 +12,16 @@ describe('Login', () => {
         const module: TestingModule = await Test.createTestingModule({
             imports: [
                 JwtModule.register({
-                    privateKey: process.env.SECRET_KEY,
+                    privateKey: 'TESTE@!@!',
                     signOptions: { expiresIn: '1d' },
                 }),
-                TypeOrmModule.forFeature([UserTypeorm]),
             ],
             providers: [
                 Login,
                 CreateUser,
                 {
                     provide: 'UserRepository',
-                    useClass: UserTypeormRepository,
+                    useClass: UserMemoryRepository,
                 },
             ],
         }).compile();

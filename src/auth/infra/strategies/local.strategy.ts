@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-local';
 import { compareSync } from 'bcrypt';
-import { UserRepository } from '../../user/domain/user.repository';
+import { UserRepository } from '../../../user/application/repository/user.repository';
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
@@ -20,7 +20,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
             throw new Error('User not found');
         }
 
-        if (!compareSync(password, user.password)) {
+        if (!compareSync(password, user.getPassword())) {
             throw new Error('Invalid password');
         }
 
