@@ -1,15 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ChangeMovementSupply } from './application/change-movement';
 import { ChangePurchaseSupply } from './application/change-purchase-supply';
-import { CreateCategory } from './application/create-category';
 import { CreatePurchaseSupply } from './application/create-purchase-supply';
 import { CreateSupplyOut } from './application/create-supply-out';
-import { CreateSupply } from './application/create-supply';
 import { CreateSupplier } from './application/create-supplier';
-import { ListCategories } from './application/list-categories';
 import { ListPurchases } from './application/list-purcheses';
 import { ListSuppliers } from './application/list-suppliers';
-import { ListSupplies } from './application/list-supplies';
 import { MovementsController } from './infra/controllers/movements.controller';
 import { SuppliersController } from './infra/controllers/suppliers.controller';
 import { SuppliesController } from './infra/controllers/suppplies.controller';
@@ -28,15 +24,11 @@ import { PurchaseController } from './infra/controllers/purchase.controller';
     providers: [
         ChangeMovementSupply,
         ChangePurchaseSupply,
-        CreateCategory,
         CreatePurchaseSupply,
         CreateSupplier,
         CreateSupplyOut,
-        CreateSupply,
-        ListCategories,
         ListPurchases,
         ListSuppliers,
-        ListSupplies,
     ],
     exports: [],
 })

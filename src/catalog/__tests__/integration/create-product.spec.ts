@@ -1,15 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CreateSupply } from './create-supply';
 import { SupplyInMemoryRepository } from '../infra/database/in-memory/supply.repository';
 
 describe('CreateSupply', () => {
-    let service: CreateSupply;
+    let service: CreateProduct;
     const supplyRepository = new SupplyInMemoryRepository();
 
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                CreateSupply,
+                CreateProduct,
                 {
                     provide: 'SupplyRepository',
                     useValue: supplyRepository,
@@ -17,7 +16,7 @@ describe('CreateSupply', () => {
             ],
         }).compile();
 
-        service = module.get<CreateSupply>(CreateSupply);
+        service = module.get<CreateProduct>(CreateProduct);
     });
     it('should create a supply', async () => {
         const input = {
