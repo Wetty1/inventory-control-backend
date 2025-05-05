@@ -9,6 +9,7 @@ import { UserModule } from './user/user.module';
 import { RevenueModule } from './revenue/revenue.module';
 import { OrderModule } from './order/order.module';
 import { LoggingInterceptor } from './@shared/interceptors/logging.interceptor';
+import { CatalogModule } from './catalog/catalog.module';
 
 @Module({
     imports: [
@@ -24,6 +25,7 @@ import { LoggingInterceptor } from './@shared/interceptors/logging.interceptor';
         UserModule,
         RevenueModule,
         OrderModule,
+        CatalogModule,
     ],
     providers: [
         {
