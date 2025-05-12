@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { RevenueTypeorm } from 'src/revenue/infra/database/typeorm/entities/revenue.entity';
 
 @Injectable()
-export class ListRevenueService {
+export class ListRevenueByTime {
     constructor(
         @InjectRepository(RevenueTypeorm)
         private readonly revenueRepository: Repository<RevenueTypeorm>,

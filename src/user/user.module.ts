@@ -3,10 +3,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserTypeorm } from './infra/typeorm/entities/user.entity';
 import { UserTypeormRepository } from './infra/typeorm/repositories/user-typeorm.repository';
 import { UsersController } from './infra/controllers/users.controller';
-import { ChangeUserPassword } from './application/usecase/change-password';
-import { CreateUser } from './application/usecase/create-user';
-import { GetUser } from './application/usecase/get-user';
-import { DesableUserService } from './application/usecase/desable-user.service';
+import { ChangeUserPassword } from './application/usecases/change-password';
+import { CreateUser } from './application/usecases/create-user';
+import { GetUser } from './application/usecases/get-user';
+import { DesableUser } from './application/usecases/desable-user';
 
 @Module({
     imports: [TypeOrmModule.forFeature([UserTypeorm])],
@@ -19,7 +19,7 @@ import { DesableUserService } from './application/usecase/desable-user.service';
             useClass: UserTypeormRepository,
         },
         GetUser,
-        DesableUserService,
+        DesableUser,
     ],
     exports: ['UserRepository'],
 })
