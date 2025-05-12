@@ -43,10 +43,19 @@ describe('CreateCategory', () => {
         };
 
         const output = await service.execute(input);
+<<<<<<< HEAD
         const getCategory = await repository.get(output.id);
 
         expect(output).toHaveProperty('id');
         expect(output).toHaveProperty('name', input.name);
         expect(getCategory).toHaveProperty('id', output.id);
+=======
+        console.log({ id: output.getId() });
+        const getCategory = await repository.get(output.getId());
+
+        expect(output).toHaveProperty('id');
+        expect(output).toHaveProperty('name', input.name);
+        expect(getCategory).toHaveProperty('id', output.getId());
+>>>>>>> origin/develop
     });
 });

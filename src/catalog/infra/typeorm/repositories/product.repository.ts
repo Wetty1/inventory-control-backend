@@ -4,8 +4,15 @@ import { Repository } from 'typeorm';
 import { ProductRepository } from 'src/catalog/domain/repository/product.repository';
 import { ProductTypeorm } from '../entities/product.entity';
 import { Product } from 'src/catalog/domain/entity/product';
+<<<<<<< HEAD
 
 export class CategoryTyperormRepository implements ProductRepository {
+=======
+import { Injectable } from '@nestjs/common';
+
+@Injectable()
+export class ProductTyperormRepository implements ProductRepository {
+>>>>>>> origin/develop
     constructor(
         @InjectRepository(ProductTypeorm)
         private readonly productTypeormRepository: Repository<ProductTypeorm>,

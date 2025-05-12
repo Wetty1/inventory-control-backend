@@ -8,12 +8,14 @@ export class CreateTableItemOrder1724812718002 implements MigrationInterface {
                 columns: [
                     {
                         name: 'id',
-                        type: 'uuid',
+                        type: 'int',
+                        isGenerated: true,
+                        generationStrategy: 'increment',
                         isPrimary: true,
                     },
                     {
                         name: 'orderId',
-                        type: 'uuid',
+                        type: 'int',
                     },
                     {
                         name: 'description',

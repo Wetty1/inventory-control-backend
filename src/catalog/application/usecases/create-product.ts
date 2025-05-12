@@ -1,4 +1,4 @@
-import { Inject } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { Product } from 'src/catalog/domain/entity/product';
 import { ProductRepository } from 'src/catalog/domain/repository/product.repository';
 
@@ -12,6 +12,7 @@ interface Output {
     name: string;
 }
 
+@Injectable()
 export class CreateProduct {
     constructor(
         @Inject('ProductRepository')
