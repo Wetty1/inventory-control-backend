@@ -1,36 +1,27 @@
-import { Revenue } from 'src/revenue/domain/entities/revenue';
-import { Repository, And, MoreThanOrEqual, LessThanOrEqual } from 'typeorm';
+import { Revenue } from 'src/revenue/domain/entity/revenue';
+import { Repository } from 'typeorm';
 import { RevenueTypeorm } from '../entities/revenue.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
-import { RevenueRepository } from 'src/revenue/application/repository/revenue.repository';
+import { RevenueRepository } from 'src/revenue/domain/repository/revenue.repository';
 @Injectable()
 export class RevenueTypeormRepository implements RevenueRepository {
     constructor(
         @InjectRepository(RevenueTypeorm)
         private readonly revenueRepository: Repository<RevenueTypeorm>,
     ) {}
-
-    async list(startDate: string, endDate: string): Promise<Revenue[]> {
-        const revenues = await this.revenueRepository.find({
-            where: {
-                date: And(
-                    MoreThanOrEqual(new Date(startDate)),
-                    LessThanOrEqual(new Date(endDate)),
-                ),
-            },
-            order: { date: 'DESC' },
-        });
-        return revenues;
-    }
-    async edit(revenue: Revenue): Promise<Revenue> {
-        this.revenueRepository.merge(revenue);
-        return this.revenueRepository.save(revenue);
-    }
-    async create(newRevenue: Revenue): Promise<Revenue> {
-        newRevenue = this.revenueRepository.create(newRevenue);
+    async save(revenue: Revenue): Promise<Revenue> {
+        const newRevenue = this.revenueRepository.create(
+            RevenueTypeorm.from(revenue),
+        );
         const createdRevenue = await this.revenueRepository.save(newRevenue);
-        return createdRevenue;
+        return RevenueTypeorm.to(createdRevenue);
+    }
+    async get(id: number): Promise<Revenue> {
+        const revenues = await this.revenueRepository.findOne({
+            where: { id },
+        });
+        return RevenueTypeorm.to(revenues);
     }
 
     async delete(id: any): Promise<void> {
