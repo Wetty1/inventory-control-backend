@@ -15,9 +15,6 @@ export class CategoryTypeorm {
     @Column()
     name: string;
 
-    @Column()
-    categoryId: number;
-
     @CreateDateColumn()
     createdAt: Date;
 

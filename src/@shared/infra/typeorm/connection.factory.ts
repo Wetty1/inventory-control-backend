@@ -22,7 +22,7 @@ export class ConnectionFactory implements TypeOrmOptionsFactory {
             port: 5432,
             synchronize: false,
             logging: false,
-            entities: ['dist/**/*.entity{.ts,.js}'],
+            entities: ['dist/**/*.entity{.ts,.js}', '**/*.entity{.ts,.js}'],
         };
     }
 }
