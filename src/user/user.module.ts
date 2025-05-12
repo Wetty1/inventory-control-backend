@@ -6,7 +6,6 @@ import { UsersController } from './infra/controllers/users.controller';
 import { ChangeUserPassword } from './application/usecase/change-password';
 import { CreateUser } from './application/usecase/create-user';
 import { GetUser } from './application/usecase/get-user';
-import { DesableUserService } from './application/usecase/desable-user.service';
 
 @Module({
     imports: [TypeOrmModule.forFeature([UserTypeorm])],
@@ -19,7 +18,6 @@ import { DesableUserService } from './application/usecase/desable-user.service';
             useClass: UserTypeormRepository,
         },
         GetUser,
-        DesableUserService,
     ],
     exports: ['UserRepository'],
 })

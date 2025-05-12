@@ -13,7 +13,9 @@ export class CreateTableProducts1711333510393 implements MigrationInterface {
                 columns: [
                     {
                         name: 'id',
-                        type: 'uuid',
+                        type: 'int',
+                        isGenerated: true,
+                        generationStrategy: 'increment',
                         isPrimary: true,
                     },
                     {
@@ -25,7 +27,7 @@ export class CreateTableProducts1711333510393 implements MigrationInterface {
                     },
                     {
                         name: 'categoryId',
-                        type: 'uuid',
+                        type: 'int',
                         isNullable: false,
                     },
                     {

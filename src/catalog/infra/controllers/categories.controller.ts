@@ -1,24 +1,21 @@
 import { Body, Controller, Get, Logger, Post } from '@nestjs/common';
-import { CreateCategory } from 'src/stock/application/create-category';
-import { ListCategories } from 'src/stock/application/list-categories';
+import { CreateCategory } from '../../application/usecases/create-category';
 
 @Controller('categories')
 export class CategoriesController {
     private readonly logger = new Logger(CategoriesController.name);
-    constructor(
-        private readonly listCategories: ListCategories,
-        private readonly createCategories: CreateCategory,
-    ) {}
+    constructor(private readonly createCategories: CreateCategory) {}
 
     @Get()
     async list() {
-        try {
-            const categories = await this.listCategories.execute();
-            return categories;
-        } catch (error) {
-            this.logger.error(error);
-            throw error;
-        }
+        // try {
+        //     const categories = await this.listCategories.execute();
+        //     return categories;
+        // } catch (error) {
+        //     this.logger.error(error);
+        //     throw error;
+        // }
+        throw new Error('Method not implemented.');
     }
 
     @Post()

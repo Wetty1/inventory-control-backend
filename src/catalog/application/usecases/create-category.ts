@@ -15,7 +15,7 @@ export class CreateCategory {
 
     async execute(input: Input) {
         const category = Category.create(input.name);
-        await this.categoryRepository.save(category);
-        return category;
+        const categoryCreated = await this.categoryRepository.save(category);
+        return categoryCreated;
     }
 }

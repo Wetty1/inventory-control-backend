@@ -8,7 +8,9 @@ export class CreateTableRevenue1711333539315 implements MigrationInterface {
                 columns: [
                     {
                         name: 'id',
-                        type: 'uuid',
+                        type: 'int',
+                        isGenerated: true,
+                        generationStrategy: 'increment',
                         isPrimary: true,
                     },
                     {
