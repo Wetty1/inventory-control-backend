@@ -4,25 +4,16 @@ export class StockEvent {
         private date: Date,
         private productId: number,
         private quantity: number,
-        private type: 'out' | 'in',
-        private unitMeasurement: string,
+        private type: string,
     ) {}
 
     static create(
         date: Date,
         productId: number,
         quantity: number,
-        type: 'out' | 'in',
-        unitMeasurement: string,
+        type: string,
     ) {
-        return new StockEvent(
-            null,
-            date,
-            productId,
-            quantity,
-            type,
-            unitMeasurement,
-        );
+        return new StockEvent(null, date, productId, quantity, type);
     }
 
     static restore(
@@ -30,17 +21,9 @@ export class StockEvent {
         date: Date,
         productId: number,
         quantity: number,
-        type: 'out' | 'in',
-        unitMeasurement: string,
+        type: string,
     ) {
-        return new StockEvent(
-            id,
-            date,
-            productId,
-            quantity,
-            type,
-            unitMeasurement,
-        );
+        return new StockEvent(id, date, productId, quantity, type);
     }
 
     getId() {
@@ -63,20 +46,12 @@ export class StockEvent {
         return this.type;
     }
 
-    getUnitMeasurement() {
-        return this.unitMeasurement;
-    }
-
     setQuantity(quantity: number) {
         this.quantity = quantity;
     }
 
-    setType(type: 'out' | 'in') {
+    setType(type: string) {
         this.type = type;
-    }
-
-    setUnitMeasurement(unitMeasurement: string) {
-        this.unitMeasurement = unitMeasurement;
     }
 
     setDate(date: Date) {

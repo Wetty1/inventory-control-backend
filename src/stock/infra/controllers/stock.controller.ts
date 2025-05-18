@@ -2,8 +2,8 @@ import { Body, Controller, Post } from '@nestjs/common';
 // import { ChangeMovementSupply } from 'src/stock/application/change-movement';
 // import { CreateSupplyOut } from 'src/stock/application/create-supply-out';
 
-@Controller('movements')
-export class MovementsController {
+@Controller('stock')
+export class StockController {
     constructor() {} // private readonly changeMovement: ChangeMovementSupply, // private readonly createSupplyOut: CreateSupplyOut,
 
     @Post()

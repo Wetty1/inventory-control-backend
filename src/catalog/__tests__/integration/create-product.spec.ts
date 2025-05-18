@@ -8,7 +8,7 @@ import { CreateProduct } from 'src/catalog/application/usecases/create-product';
 import { CategoryTypeorm } from 'src/catalog/infra/typeorm/entities/category.entity';
 import { ProductTypeorm } from 'src/catalog/infra/typeorm/entities/product.entity';
 import { CategoryTyperormRepository } from 'src/catalog/infra/typeorm/repositories/category.repository';
-import { ProductTyperormRepository } from 'src/catalog/infra/typeorm/repositories/product.repository';
+import { ProductTypeormRepository } from 'src/catalog/infra/typeorm/repositories/product.repository';
 
 describe('CreateProduct', () => {
     let service: CreateProduct;
@@ -32,7 +32,7 @@ describe('CreateProduct', () => {
                 CreateCategory,
                 {
                     provide: 'ProductRepository',
-                    useClass: ProductTyperormRepository,
+                    useClass: ProductTypeormRepository,
                 },
                 {
                     provide: 'CategoryRepository',
