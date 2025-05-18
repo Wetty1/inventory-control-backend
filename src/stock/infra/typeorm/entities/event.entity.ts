@@ -20,9 +20,7 @@ export class StockEventTypeorm {
     @Column()
     quantity: number;
     @Column()
-    type: 'out' | 'in';
-    @Column()
-    unitMeasurement: string;
+    type: string;
     @CreateDateColumn()
     createdAt: Date;
     @UpdateDateColumn()
@@ -45,7 +43,6 @@ export class StockEventTypeorm {
             stockEventTypeorm.productId,
             stockEventTypeorm.quantity,
             stockEventTypeorm.type,
-            stockEventTypeorm.unitMeasurement,
         );
     }
 }

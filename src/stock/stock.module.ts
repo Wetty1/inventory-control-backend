@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
-import { MovementsController } from './infra/controllers/movements.controller';
-import { SuppliersController } from './infra/controllers/suppliers.controller';
-import { PurchaseController } from './infra/controllers/purchase.controller';
+import { StockController } from './infra/controllers/stock.controller';
+import { CreateStockEvent } from './application/usecases/create-stock-event';
 
 @Module({
     imports: [],
-    controllers: [MovementsController, SuppliersController, PurchaseController],
+    controllers: [StockController],
     exports: [],
+    providers: [CreateStockEvent],
 })
 export class StockModule {}

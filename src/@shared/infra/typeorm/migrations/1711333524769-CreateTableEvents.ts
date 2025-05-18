@@ -9,7 +9,7 @@ export class CreateTableEvents1711333524769 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: 'events',
+                name: 'stock_events',
                 columns: [
                     {
                         name: 'id',

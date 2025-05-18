@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { TypeOrmOptionsFactory, TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { join } from 'path';
 
 @Injectable()
 export class ConnectionFactory implements TypeOrmOptionsFactory {
@@ -7,11 +8,10 @@ export class ConnectionFactory implements TypeOrmOptionsFactory {
 
     async createTypeOrmOptions(): Promise<TypeOrmModuleOptions> {
         const host = process.env.DB_HOST;
-
         const username = process.env.DB_USER;
         const password = process.env.DB_PASS;
-
         const database = process.env.DB_NAME;
+        const port = Number(process.env.DB_PORT) || 5432;
 
         return {
             type: 'postgres',
@@ -19,10 +19,12 @@ export class ConnectionFactory implements TypeOrmOptionsFactory {
             username,
             password,
             database,
-            port: 5432,
+            port,
             synchronize: false,
             logging: false,
-            entities: ['dist/**/*.entity{.ts,.js}', '**/*.entity{.ts,.js}'],
+            entities: [
+                join(__dirname, '..', '..', '..', '**/*.entity{.ts,.js}'),
+            ],
         };
     }
 }
