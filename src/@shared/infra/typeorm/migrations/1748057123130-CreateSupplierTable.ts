@@ -1,37 +1,37 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import {
+    MigrationInterface,
+    QueryRunner,
+    Table,
+    TableForeignKey,
+} from 'typeorm';
 
-export class CreateTablePurchases1711333534194 implements MigrationInterface {
+export class CreateSupplierTable1748057123130 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: 'purchases',
+                name: 'suppliers',
                 columns: [
                     {
                         name: 'id',
                         type: 'int',
+                        isPrimary: true,
                         isGenerated: true,
                         generationStrategy: 'increment',
-                        isPrimary: true,
                     },
                     {
-                        name: 'date',
-                        type: 'timestamp',
-                        isNullable: false,
+                        name: 'name',
+                        type: 'varchar',
                     },
                     {
-                        name: 'volume',
-                        type: 'int',
-                        isNullable: false,
-                    },
-                    {
-                        name: 'totalValue',
-                        type: 'decimal',
-                        isNullable: false,
-                    },
-                    {
-                        name: 'supplierId',
-                        type: 'int',
+                        name: 'cnpj',
+                        type: 'varchar',
+                        isUnique: true,
                         isNullable: true,
+                    },
+                    {
+                        name: 'address',
+                        type: 'varchar',
+                        isUnique: true,
                     },
                     {
                         name: 'createdAt',
@@ -46,16 +46,23 @@ export class CreateTablePurchases1711333534194 implements MigrationInterface {
                 ],
             }),
         );
+        const supplierForeingKey = new TableForeignKey({
+            columnNames: ['supplierId'],
+            referencedColumnNames: ['id'],
+            referencedTableName: 'suppliers',
+            onDelete: 'CASCADE',
+        });
+        await queryRunner.createForeignKey('purchases', supplierForeingKey);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
         const table = await queryRunner.getTable('purchases');
 
         const foreignKey = table.foreignKeys.find(
-            (fk) => fk.columnNames.indexOf('productId') !== -1,
+            (fk) => fk.columnNames.indexOf('supplierId') !== -1,
         );
         await queryRunner.dropForeignKey('purchases', foreignKey);
 
-        await queryRunner.dropTable('purchases');
+        await queryRunner.dropTable('suppliers');
     }
 }

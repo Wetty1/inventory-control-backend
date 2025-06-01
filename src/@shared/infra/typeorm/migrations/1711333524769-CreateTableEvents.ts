@@ -63,16 +63,16 @@ export class CreateTableEvents1711333524769 implements MigrationInterface {
             referencedTableName: 'products',
             onDelete: 'CASCADE',
         });
-        await queryRunner.createForeignKey('events', productForeignKey);
+        await queryRunner.createForeignKey('stock_events', productForeignKey);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        const table = await queryRunner.getTable('events');
+        const table = await queryRunner.getTable('stock_events');
         const productForeignKey = table.foreignKeys.find(
             (fk) => fk.columnNames.indexOf('productId') !== -1,
         );
-        await queryRunner.dropForeignKey('events', productForeignKey);
+        await queryRunner.dropForeignKey('stock_events', productForeignKey);
 
-        await queryRunner.dropTable('events');
+        await queryRunner.dropTable('stock_events');
     }
 }

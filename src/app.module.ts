@@ -10,6 +10,8 @@ import { RevenueModule } from './revenue/revenue.module';
 import { OrderModule } from './order/order.module';
 import { LoggingInterceptor } from './@shared/interceptors/logging.interceptor';
 import { CatalogModule } from './catalog/catalog.module';
+import { CreatePurchaseService } from './purchase/application/usecases/create-purchase/create-purchase.service';
+import { PurchaseModule } from './purchase/purchase.module';
 
 @Module({
     imports: [
@@ -26,6 +28,7 @@ import { CatalogModule } from './catalog/catalog.module';
         RevenueModule,
         OrderModule,
         CatalogModule,
+        PurchaseModule,
     ],
     providers: [
         {
@@ -33,6 +36,7 @@ import { CatalogModule } from './catalog/catalog.module';
             scope: Scope.REQUEST,
             useClass: LoggingInterceptor,
         },
+        CreatePurchaseService,
     ],
 })
 export class AppModule {}

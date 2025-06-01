@@ -10,23 +10,15 @@ export class CreateEventPurchaseForeingKey1713112746518
             referencedTableName: 'purchases',
             onDelete: 'CASCADE',
         });
-        await queryRunner.createForeignKey('events', purchaseForeignKey);
-
-        const eventForeignKey = new TableForeignKey({
-            columnNames: ['eventId'],
-            referencedColumnNames: ['id'],
-            referencedTableName: 'events',
-            onDelete: 'CASCADE',
-        });
-        await queryRunner.createForeignKey('purchases', eventForeignKey);
+        await queryRunner.createForeignKey('stock_events', purchaseForeignKey);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        const eventsTable = await queryRunner.getTable('events');
+        const eventsTable = await queryRunner.getTable('stock_events');
         const purchaseForeignKey = eventsTable.foreignKeys.find(
             (fk) => fk.columnNames.indexOf('purchaseId') !== -1,
         );
-        await queryRunner.dropForeignKey('events', purchaseForeignKey);
+        await queryRunner.dropForeignKey('stock_events', purchaseForeignKey);
 
         const purchasesTable = await queryRunner.getTable('purchases');
         const eventForeignKey = purchasesTable.foreignKeys.find(
