@@ -1,10 +1,8 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-// import { CreatePurchaseSupply } from 'src/stock/application/create-purchase-supply';
-// import { ListPurchases } from 'src/stock/application/list-purcheses';
 
 @Controller('purchases')
 export class PurchaseController {
-    constructor() {} // private readonly listPurchases: ListPurchases, // private readonly createBuySupply: CreatePurchaseSupply,
+    constructor() {}
 
     @Post()
     async registerPurchase(@Body() body: any) {

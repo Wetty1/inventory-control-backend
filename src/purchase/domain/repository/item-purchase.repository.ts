@@ -4,4 +4,5 @@ export interface ItemPurchaseRepository {
     save(item: ItemPurchase): Promise<ItemPurchase>;
     delete(id: number): Promise<void>;
     get(id: number): Promise<ItemPurchase>;
+    getAllByPurchaseId(purchaseId: number): Promise<ItemPurchase[]>;
 }

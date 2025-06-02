@@ -12,6 +12,7 @@ import { LoggingInterceptor } from './@shared/interceptors/logging.interceptor';
 import { CatalogModule } from './catalog/catalog.module';
 import { CreatePurchaseService } from './purchase/application/usecases/create-purchase/create-purchase.service';
 import { PurchaseModule } from './purchase/purchase.module';
+import { DeleteItemPurchaseService } from './src/purchase/application/usecases/delete-item-purchase/delete-item-purchase.service';
 
 @Module({
     imports: [
@@ -37,6 +38,7 @@ import { PurchaseModule } from './purchase/purchase.module';
             useClass: LoggingInterceptor,
         },
         CreatePurchaseService,
+        DeleteItemPurchaseService,
     ],
 })
 export class AppModule {}

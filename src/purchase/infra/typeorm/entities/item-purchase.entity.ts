@@ -2,10 +2,12 @@ import { ItemPurchase } from 'src/purchase/domain/entity/item-purchase';
 import {
     Column,
     CreateDateColumn,
+    Entity,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm';
 
+@Entity('items_purchases')
 export class ItemPurchaseTypeorm {
     @PrimaryGeneratedColumn()
     id: number;
@@ -17,9 +19,9 @@ export class ItemPurchaseTypeorm {
     productId: number;
     @Column()
     quantity: number;
-    @Column()
+    @Column({ type: 'numeric', precision: 2 })
     unitValue: number;
-    @Column()
+    @Column({ type: 'numeric', precision: 2 })
     totalValue: number;
     @Column()
     supplierId: number;

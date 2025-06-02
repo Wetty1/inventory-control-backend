@@ -103,7 +103,6 @@ describe('CreatePurchaseService', () => {
         const input = {
             date: new Date(),
             supplierId: null,
-            items: [],
         };
         const output = createPurchase.execute(input);
         await expect(output).rejects.toThrow();

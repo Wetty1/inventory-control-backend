@@ -15,7 +15,7 @@ export class PurchaseTypeorm {
     date: Date;
     @Column()
     volume: number;
-    @Column()
+    @Column({ type: 'numeric', precision: 2 })
     totalValue: number;
     @Column()
     supplierId: number;

@@ -11,6 +11,13 @@ export class ItemPurchaseTypeormRepository implements ItemPurchaseRepository {
         @InjectRepository(ItemPurchaseTypeorm)
         private readonly repository: Repository<ItemPurchaseTypeorm>,
     ) {}
+
+    async getAllByPurchaseId(purchaseId: number): Promise<ItemPurchase[]> {
+        const items = await this.repository.find({
+            where: { purchaseId },
+        });
+        return items.map((item) => ItemPurchaseTypeorm.to(item));
+    }
     async save(item: ItemPurchase): Promise<ItemPurchase> {
         const itemPurchaseTypeorm = ItemPurchaseTypeorm.from(item);
         const itemSaved = await this.repository.save(itemPurchaseTypeorm);
