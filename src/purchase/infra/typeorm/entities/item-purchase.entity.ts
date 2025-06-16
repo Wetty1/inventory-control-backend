@@ -53,8 +53,8 @@ export class ItemPurchaseTypeorm {
             itemPurchaseTypeorm.date,
             itemPurchaseTypeorm.productId,
             itemPurchaseTypeorm.quantity,
-            itemPurchaseTypeorm.unitValue,
-            itemPurchaseTypeorm.totalValue,
+            Number(itemPurchaseTypeorm.unitValue),
+            Number(itemPurchaseTypeorm.totalValue),
             itemPurchaseTypeorm.supplierId,
             itemPurchaseTypeorm.stockEventId,
         );

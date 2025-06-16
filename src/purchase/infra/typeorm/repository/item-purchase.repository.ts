@@ -31,6 +31,7 @@ export class ItemPurchaseTypeormRepository implements ItemPurchaseRepository {
         const item = await this.repository.findOne({
             where: { id },
         });
+        if (!item) return null;
         return ItemPurchaseTypeorm.to(item);
     }
 }

@@ -24,6 +24,11 @@ export class SupplierTypeormRepository implements SupplierRepository {
         const supplierTypeorm = await this.repository.findOne({
             where: { id },
         });
+        if (!supplierTypeorm) return null;
         return SupplierTypeorm.to(supplierTypeorm);
+    }
+    async delete(id: any): Promise<void> {
+        await this.repository.delete(id);
+        return Promise.resolve();
     }
 }

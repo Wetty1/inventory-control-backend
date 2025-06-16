@@ -37,10 +37,15 @@ export class CreateItemPurchase {
         if (itemsPurchase.length > 0) items.push(...itemsPurchase);
 
         purchase.setVolume(items.length);
+        purchase.setTotalValue(
+            items.reduce((acc: number, item) => {
+                return acc + item.getTotalValue();
+            }, 0),
+        );
 
         await this.purchaseRepository.save(purchase);
 
-        const totalValue = items.reduce((acc, item) => {
+        const totalValue = items.reduce((acc: number, item) => {
             return acc + item.getTotalValue();
         }, 0);
 

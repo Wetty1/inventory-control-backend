@@ -85,7 +85,7 @@ export class ItemPurchase {
         return this.quantity;
     }
 
-    getTotalValue() {
+    getTotalValue(): number {
         return this.totalValue;
     }
 

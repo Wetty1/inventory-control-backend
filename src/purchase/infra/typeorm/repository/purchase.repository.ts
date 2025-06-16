@@ -25,6 +25,13 @@ export class PurchaseTypeormRepository implements PurchaseRepository {
         const purchaseTypeorm = await this.repository.findOne({
             where: { id },
         });
+        if (!purchaseTypeorm) return null;
         return PurchaseTypeorm.to(purchaseTypeorm);
+    }
+    async existsSupplier(supplierId: number): Promise<boolean> {
+        const purchaseTypeorm = await this.repository.findOne({
+            where: { supplierId },
+        });
+        return !!purchaseTypeorm;
     }
 }

@@ -4,4 +4,5 @@ export interface PurchaseRepository {
     save(newPurchase: Purchase): Promise<Purchase>;
     delete(id: number): Promise<void>;
     get(id: number): Promise<Purchase>;
+    existsSupplier(supplierId: number): Promise<boolean>;
 }

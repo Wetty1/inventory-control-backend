@@ -39,7 +39,7 @@ export class PurchaseTypeorm {
             purchase.id,
             purchase.date,
             purchase.volume,
-            purchase.totalValue,
+            Number(purchase.totalValue),
             purchase.supplierId,
         );
     }

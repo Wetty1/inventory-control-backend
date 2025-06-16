@@ -89,7 +89,6 @@ describe('CreatePurchaseService', () => {
             address: `Address ${Math.random()}`,
             cnpj: `CNPJ ${Math.random()}`,
         });
-        console.log(supplier);
         const input = {
             date: new Date(),
             supplierId: supplier.id,
